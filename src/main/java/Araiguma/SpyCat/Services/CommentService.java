@@ -39,8 +39,13 @@ public class CommentService {
     }
 
     public Comment read(Long id){
-        return repository.findById(id).get();
-    }
+        if(repository.existsById(id)){
+            return repository.findById(id).get();
+        }
+        else{
+            return null;
+        }
+          }
 
 
     public void delete(Long id){

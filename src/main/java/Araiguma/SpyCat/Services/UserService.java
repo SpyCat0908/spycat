@@ -32,12 +32,18 @@ public class UserService {
     } 
     
     public List<User> list(){
-        List<User> list = (List<User>) repository.findAll();
+        List<User> list = repository.findAll();
         return list;
     }
 
     public User read(Long id){
-        return repository.findById(id).get();
+        if(repository.existsById(id)){
+            return repository.findById(id).get();
+        }
+        else{
+            return null;
+        }
+      
     }
 
 

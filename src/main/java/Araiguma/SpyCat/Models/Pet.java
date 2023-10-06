@@ -41,7 +41,7 @@ public class Pet {
     @ManyToOne
     @JoinColumn(name ="user_id")
     private User user;
-    @OneToOne(optional = false)
+    @OneToOne(optional = true)
     private Comment comment;
 
 

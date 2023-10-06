@@ -1,9 +1,9 @@
 package Araiguma.SpyCat.Repositories;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import Araiguma.SpyCat.Models.Message;
 
-public interface MessageRepositorie extends CrudRepository<Message, Long> {
+public interface MessageRepositorie extends JpaRepository<Message, Long> {
     
 }

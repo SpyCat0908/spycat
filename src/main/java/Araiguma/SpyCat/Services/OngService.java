@@ -38,8 +38,13 @@ public class OngService {
     }
 
     public Ong read(Long id){
-        return repository.findById(id).get();
-    }
+        if(repository.existsById(id)){
+            return repository.findById(id).get();
+        }
+        else{
+            return null;
+        }
+          }
 
 
     public void delete(Long id){
