@@ -5,9 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import Araiguma.SpyCat.Models.Localization;
 import Araiguma.SpyCat.Models.Pet;
-import Araiguma.SpyCat.Repositories.LocalizationRepositorie;
 import Araiguma.SpyCat.Repositories.PetRepositorie;
 import jakarta.transaction.Transactional;
 
@@ -16,8 +14,6 @@ public class PetService {
     @Autowired
 
     private PetRepositorie repository;
-    @Autowired
-    private LocalizationRepositorie localizationRepository;
 
     @Transactional
     public Pet create(Pet pet){
