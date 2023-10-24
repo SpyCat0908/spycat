@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import Araiguma.SpyCat.Models.User;
 import Araiguma.SpyCat.Repositories.UserRepositorie;
+import Araiguma.SpyCat.dtos.UserInputDTO;
 
 @Service
 public class UserService {
@@ -15,9 +16,13 @@ public class UserService {
     private UserRepositorie repository;
 
     @Transactional
-    public User create(User user){
-        User userCriado = repository.save(user);
-        return userCriado;
+    public User create(UserInputDTO dto){
+        User user = new User();
+        user.setEmail(dto.getEmail());
+        user.setUsername(dto.getUsername());
+        user.setPassword(dto.getPassword());
+
+        return repository.save(user);
     }
 
     @Transactional
