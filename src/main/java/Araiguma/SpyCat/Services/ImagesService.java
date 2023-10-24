@@ -4,11 +4,12 @@ import Araiguma.SpyCat.Repositories.ImagesRepositorie;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import Araiguma.SpyCat.Models.Images;
 import jakarta.transaction.Transactional;
 
-
+@Service
 public class ImagesService {
     @Autowired
 
