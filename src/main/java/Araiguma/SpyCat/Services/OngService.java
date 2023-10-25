@@ -6,19 +6,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import Araiguma.SpyCat.Models.Ong;
-import Araiguma.SpyCat.Repositories.OngRepositorie;
+import Araiguma.SpyCat.Repositories.OngRepository;
 import jakarta.transaction.Transactional;
+import main.java.Araiguma.SpyCat.dtos.OngInputDTO;
 
 @Service
 public class OngService {
     @Autowired
 
-    private OngRepositorie repository;
+    private OngRepository repository;
     
     @Transactional
-    public Ong create(Ong ong){
-        Ong ongCriado = repository.save(ong);
-        return ongCriado;
+    public Ong create(OngInputDTO dto){
+        Ong ong = new Ong();
+
+        ong.setTradingName(dto.tradingName());
+        ong.setCnpj(dto.cnpj());
+        ong.setPhone(dto.phone());
+        ong.setEmail(dto.email());
+
+        return repository.save(ong);
     }
 
     @Transactional

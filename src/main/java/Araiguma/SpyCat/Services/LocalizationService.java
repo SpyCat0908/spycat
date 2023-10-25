@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import Araiguma.SpyCat.Models.Localization;
-import Araiguma.SpyCat.Repositories.LocalizationRepositorie;
+import Araiguma.SpyCat.Repositories.LocalizationRepository;
 import jakarta.transaction.Transactional;
 
 @Service
 public class LocalizationService {
     @Autowired
 
-    private LocalizationRepositorie repository;
+    private LocalizationRepository repository;
 
     @Transactional
     public Localization create(Localization localization){

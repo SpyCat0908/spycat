@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import Araiguma.SpyCat.Models.Ong;
 import Araiguma.SpyCat.Services.OngService;
+import main.java.Araiguma.SpyCat.dtos.OngInputDTO;
 
 
 @RestController
@@ -27,7 +28,7 @@ public class OngController {
     private OngService service;
     
     @PostMapping
-    public ResponseEntity<Ong> create(@RequestBody Ong ong){
+    public ResponseEntity<Ong> create(@RequestBody OngInputDTO ong){
         Ong OngCriado = service.create(ong);
         return new ResponseEntity<>(OngCriado, HttpStatus.CREATED);
     }

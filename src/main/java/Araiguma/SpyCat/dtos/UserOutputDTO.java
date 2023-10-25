@@ -5,6 +5,4 @@ public record UserOutputDTO(
     String email, 
     String username, 
     String city
-) {
-
-}
+) {}

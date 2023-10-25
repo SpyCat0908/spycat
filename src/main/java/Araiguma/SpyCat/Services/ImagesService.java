@@ -1,6 +1,6 @@
 package Araiguma.SpyCat.Services;
 
-import Araiguma.SpyCat.Repositories.ImagesRepositorie;
+import Araiguma.SpyCat.Repositories.ImagesRepository;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import jakarta.transaction.Transactional;
 public class ImagesService {
     @Autowired
 
-    private ImagesRepositorie repository;
+    private ImagesRepository repository;
 
     @Transactional
     public Images create(Images images){

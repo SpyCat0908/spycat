@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import Araiguma.SpyCat.Models.Comment;
-import Araiguma.SpyCat.Repositories.CommentRepositorie;
+import Araiguma.SpyCat.Repositories.CommentRepository;
 import jakarta.transaction.Transactional;
 
 
@@ -14,7 +14,7 @@ import jakarta.transaction.Transactional;
 public class CommentService {
     @Autowired
 
-    private CommentRepositorie repository;
+    private CommentRepository repository;
 
     @Transactional
     public Comment create(Comment comment){

@@ -7,20 +7,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import Araiguma.SpyCat.Models.User;
-import Araiguma.SpyCat.Repositories.UserRepositorie;
+import Araiguma.SpyCat.Repositories.UserRepository;
 import Araiguma.SpyCat.dtos.UserInputDTO;
 
 @Service
 public class UserService {
     @Autowired
-    private UserRepositorie repository;
+    private UserRepository repository;
 
     @Transactional
     public User create(UserInputDTO dto){
         User user = new User();
-        user.setEmail(dto.getEmail());
-        user.setUsername(dto.getUsername());
-        user.setPassword(dto.getPassword());
+        user.setEmail(dto.email());
+        user.setUsername(dto.username());
+        user.setPassword(dto.password());
 
         return repository.save(user);
     }

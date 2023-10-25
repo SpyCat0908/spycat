@@ -6,19 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import Araiguma.SpyCat.Models.Pet;
-import Araiguma.SpyCat.Repositories.PetRepositorie;
+import Araiguma.SpyCat.Repositories.PetRepository;
+import Araiguma.SpyCat.dtos.PetInputDTO;
 import jakarta.transaction.Transactional;
 
 @Service
 public class PetService {
     @Autowired
 
-    private PetRepositorie repository;
+    private PetRepository repository;
 
     @Transactional
-    public Pet create(Pet pet){
-        Pet petCriado = repository.save(pet);
-        return petCriado;
+    public Pet create(PetInputDTO dto){
+        Pet pet = new Pet();
+        pet.setCharacteristics(dto.characteristics());
+        pet.setDescription(dto.description());
+        pet.setCity(dto.city());
+        pet.setState(dto.state());
+        
+        return repository.save(pet);
     }
 
     @Transactional

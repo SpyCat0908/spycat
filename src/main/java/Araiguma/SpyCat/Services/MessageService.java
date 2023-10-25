@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import Araiguma.SpyCat.Models.Message;
-import Araiguma.SpyCat.Repositories.MessageRepositorie;
+import Araiguma.SpyCat.Repositories.MessageRepository;
 import jakarta.transaction.Transactional;
 
 @Service
 public class MessageService {
     @Autowired
 
-    private MessageRepositorie repository;
+    private MessageRepository repository;
 
     @Transactional
     public Message create(Message message){
