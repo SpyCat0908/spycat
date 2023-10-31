@@ -2,6 +2,7 @@ package Araiguma.SpyCat.Models;
 
 
 
+import Araiguma.SpyCat.dtos.OngInputDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,6 +29,13 @@ public class Ong {
     @Column(nullable = false, unique = true )
     private String email;
     @OneToOne(optional = false)
-    private Localization localization;
+    private Location location;
+
+    public Ong(OngInputDTO dto){
+        this.tradingName = dto.tradingName();
+        this.cnpj = dto.cnpj();
+        this.phone = dto.phone();
+        this.email = dto.email();
+    }
 
 }

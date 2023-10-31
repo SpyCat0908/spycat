@@ -20,7 +20,6 @@ public class LostPetService {
     public LostPet create(LostPetInputDTO dto){
         LostPet lostPet = new LostPet();
         
-        lostPet.setCharacteristics(dto.characteristics());
         lostPet.setDescription(dto.description());
         lostPet.setCity(dto.city());
         lostPet.setState(dto.state());

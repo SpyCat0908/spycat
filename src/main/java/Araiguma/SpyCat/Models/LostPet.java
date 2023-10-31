@@ -1,5 +1,6 @@
 package Araiguma.SpyCat.Models;
 
+import Araiguma.SpyCat.dtos.LostPetInputDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
@@ -17,4 +18,13 @@ public class LostPet extends Pet {
     private String email;
     
     
+    public LostPet(LostPetInputDTO dto){
+        this.description = dto.description();
+        this.city = dto.city();
+        this.state = dto.state();
+        this.email = dto.email();
+        this.phone = dto.phone();
+        this.color = dto.color();
+        this.specie = dto.specie();
+    }
 }

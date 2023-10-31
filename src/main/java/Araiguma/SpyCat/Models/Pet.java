@@ -2,6 +2,7 @@ package Araiguma.SpyCat.Models;
 
 import java.util.List;
 
+import Araiguma.SpyCat.dtos.PetInputDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -26,24 +27,32 @@ public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="pet_id")
-    private long id;
-    private String characteristics;
-    private String description;
-    private String city;
-    private String state;
+    protected long id;
+    protected String color;
+    protected String specie;
+    protected String description;
+    protected String city;
+    protected String state;
     @Enumerated(EnumType.STRING)
-    private Status status;
-    //cria uma lista de localizações usando a anotação @OneToMany
+    protected Status status;
     @OneToMany(mappedBy = "pet")
-    private List<Localization> localizations;
-    @OneToMany(mappedBy = "pet")
-    private List<Images> images;
+    protected List<Location> locations;
+    protected List<String> images;
     @ManyToOne
     @JoinColumn(name ="user_id")
-    private User user;
+    protected User user;
     @OneToOne(optional = true)
-    private Comment comment;
+    protected Comment comment;
 
+    
+    public Pet(PetInputDTO dto){
+        this.color = dto.color();
+        this.specie = dto.specie();
+        this.description = dto.description();
+        this.city = dto.city();
+        this.state = dto.state();
+        this.images = dto.images();
+    }
 
 
 }

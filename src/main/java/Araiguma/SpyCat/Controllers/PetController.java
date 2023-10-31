@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import Araiguma.SpyCat.Models.Pet;
 import Araiguma.SpyCat.Services.PetService;
 import Araiguma.SpyCat.dtos.PetInputDTO;
+import Araiguma.SpyCat.dtos.PetOutputDTO;
 
 
 @RestController
@@ -28,9 +29,9 @@ public class PetController {
     private PetService service;
     
     @PostMapping
-    public ResponseEntity<Pet> create(@RequestBody PetInputDTO pet){
-        Pet PetCriado = service.create(pet);
-        return new ResponseEntity<>(PetCriado, HttpStatus.CREATED);
+    public ResponseEntity<PetOutputDTO> create(@RequestBody PetInputDTO pet){
+        PetOutputDTO PetCriado = service.create(pet);
+        return new ResponseEntity<PetOutputDTO>(PetCriado, HttpStatus.CREATED);
     }
     @PutMapping
         public ResponseEntity<Pet> update(@RequestBody Pet pet){
