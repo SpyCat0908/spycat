@@ -1,10 +1,14 @@
 package Araiguma.SpyCat.dtos;
 
+import java.util.List;
+
 public record PetInputDTO(
-    String characteristics,
+    String color,
+    String specie,
     String description,
     String city,
-    String state
+    String state,
+    List<String> images
     
 ) {
     
