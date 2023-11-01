@@ -1,6 +1,9 @@
 package Araiguma.SpyCat.Services;
 
 import Araiguma.SpyCat.Repositories.ImagesRepository;
+import Araiguma.SpyCat.dtos.ImagesInputDTO;
+import Araiguma.SpyCat.dtos.ImagesOutputDTO;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +19,11 @@ public class ImagesService {
     private ImagesRepository repository;
 
     @Transactional
-    public Images create(Images images){
-        Images imagesCriado = repository.save(images);
-        return imagesCriado;
+    public ImagesOutputDTO create(ImagesInputDTO dto){
+        Images images = new Images(dto);
+        repository.save(images);
+        ImagesOutputDTO imagesAuxiliar = new ImagesOutputDTO(images);
+        return imagesAuxiliar;
     }
 
     @Transactional

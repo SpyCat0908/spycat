@@ -18,9 +18,10 @@ public class UserService {
 
     @Transactional
     public UserOutputDTO create(UserInputDTO dto){
-        User user = new User();
-
-        return repository.save(user);
+        User user = new User(dto);
+        repository.save(user);
+        UserOutputDTO userAuxiliar = new UserOutputDTO(user);
+        return userAuxiliar;
     }
 
     @Transactional

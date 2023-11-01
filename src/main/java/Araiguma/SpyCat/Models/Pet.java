@@ -2,6 +2,7 @@ package Araiguma.SpyCat.Models;
 
 import java.util.List;
 
+import Araiguma.SpyCat.Enum.Status;
 import Araiguma.SpyCat.dtos.PetInputDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

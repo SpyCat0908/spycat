@@ -1,5 +1,6 @@
 package Araiguma.SpyCat.Models;
 
+import Araiguma.SpyCat.dtos.ImagesInputDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,4 +24,8 @@ public class Images {
     @JoinColumn(name = "pet_id")
     private Pet pet;
 
+    public Images(ImagesInputDTO dto){
+        this.url = dto.url();
+        this.pet = dto.pet();
+    }
 }

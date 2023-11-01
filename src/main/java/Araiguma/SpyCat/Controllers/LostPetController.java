@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import Araiguma.SpyCat.Models.LostPet;
 import Araiguma.SpyCat.Services.LostPetService;
 import Araiguma.SpyCat.dtos.LostPetInputDTO;
+import Araiguma.SpyCat.dtos.LostPetOutputDTO;
 
 
 @RestController
@@ -28,9 +29,9 @@ public class LostPetController {
     private LostPetService service;
     
     @PostMapping
-    public ResponseEntity<LostPet> create(@RequestBody LostPetInputDTO lostPet){
-        LostPet LostPetCriado = service.create(lostPet);
-        return new ResponseEntity<>(LostPetCriado, HttpStatus.CREATED);
+    public ResponseEntity<LostPetOutputDTO> create(@RequestBody LostPetInputDTO lostPet){
+        LostPetOutputDTO LostPetCriado = service.create(lostPet);
+        return new ResponseEntity<LostPetOutputDTO>(LostPetCriado, HttpStatus.CREATED);
     }
     @PutMapping
         public ResponseEntity<LostPet> update(@RequestBody LostPet lostPet){

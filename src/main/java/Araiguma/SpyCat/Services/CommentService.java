@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import Araiguma.SpyCat.Models.Comment;
 import Araiguma.SpyCat.Repositories.CommentRepository;
+import Araiguma.SpyCat.dtos.CommentInputDTO;
+import Araiguma.SpyCat.dtos.CommentOutputDTO;
 import jakarta.transaction.Transactional;
 
 
@@ -17,9 +19,11 @@ public class CommentService {
     private CommentRepository repository;
 
     @Transactional
-    public Comment create(Comment comment){
-        Comment commentCriado = repository.save(comment);
-        return commentCriado;
+    public CommentOutputDTO create(CommentInputDTO dto){
+        Comment comment = new Comment(dto);
+        repository.save(comment);
+        CommentOutputDTO commentAuxiliar = new CommentOutputDTO(comment);
+        return commentAuxiliar;
     }
 
     @Transactional

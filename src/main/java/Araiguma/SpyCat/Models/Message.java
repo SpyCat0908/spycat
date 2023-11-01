@@ -2,7 +2,7 @@ package Araiguma.SpyCat.Models;
 
 import java.time.LocalDateTime;
 
-
+import Araiguma.SpyCat.dtos.MessageInputDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,6 +28,11 @@ public class Message {
     @JoinColumn(name = "comment_id")
     private Comment comment;
 
-    
+    public Message(MessageInputDTO dto){
+        this.user = dto.user();
+        this.text = dto.text();
+        this.date = dto.date();
+        this.comment = dto.comment();
+    }
     
 }

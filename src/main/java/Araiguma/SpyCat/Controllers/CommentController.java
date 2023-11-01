@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import Araiguma.SpyCat.Models.Comment;
 import Araiguma.SpyCat.Services.CommentService;
+import Araiguma.SpyCat.dtos.CommentInputDTO;
+import Araiguma.SpyCat.dtos.CommentOutputDTO;
 
 
 @RestController
@@ -27,9 +29,9 @@ public class CommentController {
     private CommentService service;
     
     @PostMapping
-    public ResponseEntity<Comment> create(@RequestBody Comment comment){
-        Comment CommentCriado = service.create(comment);
-        return new ResponseEntity<>(CommentCriado, HttpStatus.CREATED);
+    public ResponseEntity<CommentOutputDTO> create(@RequestBody CommentInputDTO comment){
+        CommentOutputDTO CommentCriado = service.create(comment);
+        return new ResponseEntity<CommentOutputDTO>(CommentCriado, HttpStatus.CREATED);
     }
     @PutMapping
         public ResponseEntity<Comment> update(@RequestBody Comment comment){

@@ -2,6 +2,7 @@ package Araiguma.SpyCat.Models;
 
 import java.time.LocalDateTime;
 
+import Araiguma.SpyCat.dtos.LocationInpuDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,6 +24,11 @@ public class Location{
     @JoinColumn(name = "pet_id")
     private Pet pet;
 
-
+    public Location(LocationInpuDTO dto){
+        this.longitude = dto.latitude();
+        this.latitude = dto.latitude();
+        this.date = dto.date();
+        this.pet = dto.pet();
+    }
 
 }

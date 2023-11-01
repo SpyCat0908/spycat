@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import Araiguma.SpyCat.Models.LostPet;
 import Araiguma.SpyCat.Repositories.LostPetRepository;
 import Araiguma.SpyCat.dtos.LostPetInputDTO;
+import Araiguma.SpyCat.dtos.LostPetOutputDTO;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -17,16 +18,11 @@ public class LostPetService {
     private LostPetRepository repository;
 
     @Transactional
-    public LostPet create(LostPetInputDTO dto){
-        LostPet lostPet = new LostPet();
-        
-        lostPet.setDescription(dto.description());
-        lostPet.setCity(dto.city());
-        lostPet.setState(dto.state());
-        lostPet.setPhone(dto.phone());
-        lostPet.setEmail(dto.email());
-
-        return repository.save(lostPet) ;
+    public LostPetOutputDTO create(LostPetInputDTO dto){
+        LostPet lostPet = new LostPet(dto);
+        repository.save(lostPet);
+        LostPetOutputDTO lostPetAuxiliar = new LostPetOutputDTO(lostPet);
+        return lostPetAuxiliar;
     }
 
     @Transactional

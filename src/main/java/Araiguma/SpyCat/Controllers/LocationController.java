@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import Araiguma.SpyCat.Models.Location;
 import Araiguma.SpyCat.Services.LocationService;
+import Araiguma.SpyCat.dtos.LocationInpuDTO;
+import Araiguma.SpyCat.dtos.LocationOutputDTO;
 
 
 @RestController
@@ -27,9 +29,9 @@ public class LocationController {
     private LocationService service;
     
     @PostMapping
-    public ResponseEntity<Location> create(@RequestBody Location location){
-        Location LocationCriado = service.create(location);
-        return new ResponseEntity<>(LocationCriado, HttpStatus.CREATED);
+    public ResponseEntity<LocationOutputDTO> create(@RequestBody LocationInpuDTO location){
+        LocationOutputDTO LocationCriado = service.create(location);
+        return new ResponseEntity<LocationOutputDTO>(LocationCriado, HttpStatus.CREATED);
     }
     @PutMapping
         public ResponseEntity<Location> update(@RequestBody Location location){

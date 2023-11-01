@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import Araiguma.SpyCat.Models.Ong;
 import Araiguma.SpyCat.Repositories.OngRepository;
+import Araiguma.SpyCat.dtos.OngOutputDTO;
 import jakarta.transaction.Transactional;
 import main.java.Araiguma.SpyCat.dtos.OngInputDTO;
 
@@ -17,15 +18,12 @@ public class OngService {
     private OngRepository repository;
     
     @Transactional
-    public Ong create(OngInputDTO dto){
-        Ong ong = new Ong();
+    public OngOutputDTO create(OngInputDTO dto){
+        Ong ong = new Ong(dto);
+        repository.save(ong);
+        OngOutputDTO ongAuxiliar = new OngOutputDTO(ong);
+        return ongAuxiliar;
 
-        ong.setTradingName(dto.tradingName());
-        ong.setCnpj(dto.cnpj());
-        ong.setPhone(dto.phone());
-        ong.setEmail(dto.email());
-
-        return repository.save(ong);
     }
 
     @Transactional

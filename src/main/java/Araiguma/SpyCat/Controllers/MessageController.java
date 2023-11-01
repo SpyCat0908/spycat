@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import Araiguma.SpyCat.Models.Message;
 import Araiguma.SpyCat.Services.MessageService;
+import Araiguma.SpyCat.dtos.MessageInputDTO;
+import Araiguma.SpyCat.dtos.MessageOutputDTO;
 
 
 @RestController
@@ -27,9 +29,9 @@ public class MessageController {
     private MessageService service;
     
     @PostMapping
-    public ResponseEntity<Message> create(@RequestBody Message message){
-        Message MessageCriado = service.create(message);
-        return new ResponseEntity<>(MessageCriado, HttpStatus.CREATED);
+    public ResponseEntity<MessageOutputDTO> create(@RequestBody MessageInputDTO message){
+        MessageOutputDTO MessageCriado = service.create(message);
+        return new ResponseEntity<MessageOutputDTO>(MessageCriado, HttpStatus.CREATED);
     }
     @PutMapping
         public ResponseEntity<Message> update(@RequestBody Message message){

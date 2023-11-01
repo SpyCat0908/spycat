@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import Araiguma.SpyCat.Models.Images;
 import Araiguma.SpyCat.Services.ImagesService;
+import Araiguma.SpyCat.dtos.ImagesInputDTO;
+import Araiguma.SpyCat.dtos.ImagesOutputDTO;
 
 
 @RestController
@@ -27,9 +29,9 @@ public class ImagesController {
     private ImagesService service;
     
     @PostMapping
-    public ResponseEntity<Images> create(@RequestBody Images images){
-        Images ImagesCriado = service.create(images);
-        return new ResponseEntity<>(ImagesCriado, HttpStatus.CREATED);
+    public ResponseEntity<ImagesOutputDTO> create(@RequestBody ImagesInputDTO images){
+        ImagesOutputDTO ImagesCriado = service.create(images);
+        return new ResponseEntity<ImagesOutputDTO>(ImagesCriado, HttpStatus.CREATED);
     }
     @PutMapping
         public ResponseEntity<Images> update(@RequestBody Images images){

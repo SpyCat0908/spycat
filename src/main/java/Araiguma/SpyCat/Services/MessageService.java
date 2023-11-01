@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import Araiguma.SpyCat.Models.Message;
 import Araiguma.SpyCat.Repositories.MessageRepository;
+import Araiguma.SpyCat.dtos.MessageInputDTO;
+import Araiguma.SpyCat.dtos.MessageOutputDTO;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -16,9 +18,11 @@ public class MessageService {
     private MessageRepository repository;
 
     @Transactional
-    public Message create(Message message){
-        Message messageCriado = repository.save(message);
-        return messageCriado;
+    public MessageOutputDTO create(MessageInputDTO dto){
+        Message message = new Message(dto); 
+        repository.save(message);
+        MessageOutputDTO messageAuxiliar = new MessageOutputDTO(message);
+        return messageAuxiliar;
     }
 
     @Transactional

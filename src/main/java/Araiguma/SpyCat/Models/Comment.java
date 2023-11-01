@@ -2,6 +2,7 @@ package Araiguma.SpyCat.Models;
 
 import java.util.List;
 
+import Araiguma.SpyCat.dtos.CommentInputDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,5 +21,7 @@ public class Comment {
     @OneToMany(mappedBy = "comment")
     private List <Message> messages;
     
-    
+    public Comment(CommentInputDTO dto){
+        this.messages = dto.messages();
+    }
 }

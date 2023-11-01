@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import Araiguma.SpyCat.Models.User;
 import Araiguma.SpyCat.Services.UserService;
 import Araiguma.SpyCat.dtos.UserInputDTO;
+import Araiguma.SpyCat.dtos.UserOutputDTO;
 
 
 @RestController
@@ -28,9 +29,9 @@ public class UserController {
     private UserService service;
     
     @PostMapping
-    public ResponseEntity<User> create(@RequestBody UserInputDTO user){
-        User UserCriado = service.create(user);
-        return new ResponseEntity<>(UserCriado, HttpStatus.CREATED);
+    public ResponseEntity<UserOutputDTO> create(@RequestBody UserInputDTO user){
+        UserOutputDTO UserCriado = service.create(user);
+        return new ResponseEntity<UserOutputDTO>(UserCriado, HttpStatus.CREATED);
     }
     @PutMapping
         public ResponseEntity<User> update(@RequestBody User user){
