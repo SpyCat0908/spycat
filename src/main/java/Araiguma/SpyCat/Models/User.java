@@ -26,18 +26,18 @@ public class User {
     private String username;
     @Column(nullable = false)
     private String password;
-    @Column(nullable = false)
+    // @Column(nullable = false)
     private String city;
-    @Column(nullable = false)
+    // @Column(nullable = false)
     private String state;
     @OneToMany(mappedBy = "user")
     private List<Pet> pets = new ArrayList<Pet>();
     private String icon;
 
     public User (UserInputDTO dto){
-        this.email = dto.email();
         this.username = dto.username();
         this.password = dto.password();
+        this.email = dto.email();
 
     }
     
