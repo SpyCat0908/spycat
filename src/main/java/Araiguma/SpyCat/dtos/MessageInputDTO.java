@@ -9,7 +9,7 @@ public record MessageInputDTO(
     User user,
     String text,
     LocalDateTime date,
-    Comment comment
+    CommentInputDTO comment
 ) {
     
 }

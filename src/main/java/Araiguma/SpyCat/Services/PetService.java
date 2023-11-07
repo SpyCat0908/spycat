@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import Araiguma.SpyCat.Models.Location;
 import Araiguma.SpyCat.Models.Pet;
+import Araiguma.SpyCat.Repositories.LocationRepository;
 import Araiguma.SpyCat.Repositories.PetRepository;
 import Araiguma.SpyCat.dtos.PetInputDTO;
 import Araiguma.SpyCat.dtos.PetOutputDTO;
@@ -14,15 +16,20 @@ import jakarta.transaction.Transactional;
 @Service
 public class PetService {
     @Autowired
-
     private PetRepository repository;
 
+    @Autowired
+    private LocationRepository locationRepository;
+
     @Transactional
-    public PetOutputDTO create(PetInputDTO dto){
-        Pet pet = new Pet(dto);
-        repository.save(pet);
-        PetOutputDTO petAuxiliar = new PetOutputDTO(pet);
-        return petAuxiliar;
+    public Pet create(PetInputDTO dto){
+
+        Location location = new Location(dto.location());
+        locationRepository.save(location);
+
+
+        Pet pet = new Pet(dto, location);
+        return repository.save(pet);
     }
 
     @Transactional

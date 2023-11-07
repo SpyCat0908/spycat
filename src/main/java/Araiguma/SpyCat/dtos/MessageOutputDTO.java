@@ -11,9 +11,9 @@ public record MessageOutputDTO(
     User user,
     String text,
     LocalDateTime date,
-    Comment comment
+    CommentOutputDTO comment
 ) {
     public MessageOutputDTO(Message message){
-        this(message.getId(), message.getUser(), message.getText(), message.getDate(), message.getComment());
+        this(message.getId(), message.getUser(), message.getText(), message.getDate(), new CommentOutputDTO(message.getComment()));
     }
 }

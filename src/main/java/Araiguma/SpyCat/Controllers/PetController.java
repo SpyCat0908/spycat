@@ -29,9 +29,9 @@ public class PetController {
     private PetService service;
     
     @PostMapping
-    public ResponseEntity<PetOutputDTO> create(@RequestBody PetInputDTO pet){
-        PetOutputDTO PetCriado = service.create(pet);
-        return new ResponseEntity<PetOutputDTO>(PetCriado, HttpStatus.CREATED);
+    public ResponseEntity<Pet> create(@RequestBody PetInputDTO pet){
+        Pet PetCriado = service.create(pet);
+        return new ResponseEntity<Pet>(PetCriado, HttpStatus.CREATED);
     }
     @PutMapping
         public ResponseEntity<Pet> update(@RequestBody Pet pet){

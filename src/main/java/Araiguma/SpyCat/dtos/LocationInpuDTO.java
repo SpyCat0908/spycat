@@ -7,8 +7,7 @@ import Araiguma.SpyCat.Models.Pet;
 public record LocationInpuDTO(
     double longitude,
     double latitude,
-    LocalDateTime date,
-    Pet pet
+    LocalDateTime date
 ){
     
 }

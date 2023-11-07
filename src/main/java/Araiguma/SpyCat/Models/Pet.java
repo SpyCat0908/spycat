@@ -1,5 +1,6 @@
 package Araiguma.SpyCat.Models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Araiguma.SpyCat.Enum.Status;
@@ -36,8 +37,8 @@ public class Pet {
     protected String state;
     @Enumerated(EnumType.STRING)
     protected Status status;
-    @OneToMany(mappedBy = "pet")
-    protected List<Location> locations;
+    @OneToMany
+    protected List<Location> locations = new ArrayList<Location>();
     protected List<String> images;
     @ManyToOne
     @JoinColumn(name ="user_id")
@@ -46,13 +47,14 @@ public class Pet {
     protected Comment comment;
 
     
-    public Pet(PetInputDTO dto){
+    public Pet(PetInputDTO dto, Location location){
         this.color = dto.color();
         this.specie = dto.specie();
         this.description = dto.description();
         this.city = dto.city();
         this.state = dto.state();
         this.images = dto.images();
+        this.locations.add(location);
     }
 
 

@@ -32,7 +32,7 @@ public class Message {
         this.user = dto.user();
         this.text = dto.text();
         this.date = dto.date();
-        this.comment = dto.comment();
+        this.comment = new Comment(dto.comment());
     }
     
 }

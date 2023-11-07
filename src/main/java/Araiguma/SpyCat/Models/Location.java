@@ -28,7 +28,7 @@ public class Location{
         this.longitude = dto.latitude();
         this.latitude = dto.latitude();
         this.date = dto.date();
-        this.pet = dto.pet();
+
     }
 
 }

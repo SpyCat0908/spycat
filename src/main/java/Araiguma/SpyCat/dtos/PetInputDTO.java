@@ -8,7 +8,8 @@ public record PetInputDTO(
     String description,
     String city,
     String state,
-    List<String> images
+    List<String> images,
+    LocationInpuDTO location
     
 ) {
     
