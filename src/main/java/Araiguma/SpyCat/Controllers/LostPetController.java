@@ -19,6 +19,7 @@ import Araiguma.SpyCat.Models.LostPet;
 import Araiguma.SpyCat.Services.LostPetService;
 import Araiguma.SpyCat.dtos.LostPetInputDTO;
 import Araiguma.SpyCat.dtos.LostPetOutputDTO;
+import jakarta.validation.Valid;
 
 
 @RestController
@@ -29,12 +30,12 @@ public class LostPetController {
     private LostPetService service;
     
     @PostMapping
-    public ResponseEntity<LostPetOutputDTO> create(@RequestBody LostPetInputDTO lostPet){
+    public ResponseEntity<LostPetOutputDTO> create(@Valid @RequestBody LostPetInputDTO lostPet){
         LostPetOutputDTO LostPetCriado = service.create(lostPet);
         return new ResponseEntity<LostPetOutputDTO>(LostPetCriado, HttpStatus.CREATED);
     }
     @PutMapping
-        public ResponseEntity<LostPet> update(@RequestBody LostPet lostPet){
+        public ResponseEntity<LostPet> update(@Valid @RequestBody LostPet lostPet){
         LostPet lostPetUpdate = service.update(lostPet);
         return new ResponseEntity<>(lostPetUpdate, HttpStatus.OK);
     }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import Araiguma.SpyCat.Enum.Status;
 import Araiguma.SpyCat.dtos.PetInputDTO;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -37,7 +38,7 @@ public class Pet {
     protected String state;
     @Enumerated(EnumType.STRING)
     protected Status status;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     protected List<Location> locations = new ArrayList<Location>();
     protected List<String> images;
     @ManyToOne
@@ -47,14 +48,14 @@ public class Pet {
     protected Comment comment;
 
     
-    public Pet(PetInputDTO dto, Location location){
+    public Pet(PetInputDTO dto){
         this.color = dto.color();
         this.specie = dto.specie();
         this.description = dto.description();
         this.city = dto.city();
         this.state = dto.state();
         this.images = dto.images();
-        this.locations.add(location);
+        this.locations.add(new Location(dto.location()));
     }
 
 

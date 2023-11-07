@@ -1,12 +1,21 @@
 package Araiguma.SpyCat.dtos;
 
 import Araiguma.SpyCat.Models.User;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public record UserOutputDTO(
-    Long id, 
-    String username, 
+    @NotNull
+    Long id,
+    @NotBlank 
+    String username,
+    @NotBlank 
     String state,
-    String email, 
+    @NotBlank
+    @Email
+    String email,
+    @NotBlank 
     String city
 ) {
     public UserOutputDTO(User user){

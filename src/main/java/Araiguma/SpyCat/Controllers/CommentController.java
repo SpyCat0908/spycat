@@ -19,6 +19,7 @@ import Araiguma.SpyCat.Models.Comment;
 import Araiguma.SpyCat.Services.CommentService;
 import Araiguma.SpyCat.dtos.CommentInputDTO;
 import Araiguma.SpyCat.dtos.CommentOutputDTO;
+import jakarta.validation.Valid;
 
 
 @RestController
@@ -29,12 +30,12 @@ public class CommentController {
     private CommentService service;
     
     @PostMapping
-    public ResponseEntity<CommentOutputDTO> create(@RequestBody CommentInputDTO comment){
+    public ResponseEntity<CommentOutputDTO> create(@Valid @RequestBody CommentInputDTO comment){
         CommentOutputDTO CommentCriado = service.create(comment);
         return new ResponseEntity<CommentOutputDTO>(CommentCriado, HttpStatus.CREATED);
     }
     @PutMapping
-        public ResponseEntity<Comment> update(@RequestBody Comment comment){
+        public ResponseEntity<Comment> update(@Valid @RequestBody Comment comment){
         Comment commentUpdate = service.update(comment);
         return new ResponseEntity<>(commentUpdate, HttpStatus.OK);
     }

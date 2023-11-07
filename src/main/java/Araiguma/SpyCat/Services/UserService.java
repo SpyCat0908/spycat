@@ -1,6 +1,7 @@
 package Araiguma.SpyCat.Services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,9 +26,10 @@ public class UserService {
     }
 
     @Transactional
-    public User update(User user){
-        if(repository.existsById(user.getId())){
-            return repository.save(user);
+    public UserOutputDTO update(UserInputDTO user){
+        User userUpdate = new User(user);
+        if(repository.existsById(userUpdate.getId())){
+            return new UserOutputDTO( repository.save(userUpdate));
             
         }
         else{
@@ -56,5 +58,21 @@ public class UserService {
             repository.deleteById(id);
         }
     }
+
+    // public Boolean login(String email, String password){
+    //     User userLogado = repository.findBy(email);
+
+    //     if(userLogado.getEmail() == email && userLogado.getPassword() == password){
+    //         return true;
+    //     }
+    //     else{
+    //         return false;
+    //     }
+
+    // }
+    public Optional<User> findByEmail(String email){
+        return repository.findByEmail(email);
+     }
+ 
     
 }

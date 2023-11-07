@@ -19,6 +19,7 @@ import Araiguma.SpyCat.Models.Message;
 import Araiguma.SpyCat.Services.MessageService;
 import Araiguma.SpyCat.dtos.MessageInputDTO;
 import Araiguma.SpyCat.dtos.MessageOutputDTO;
+import jakarta.validation.Valid;
 
 
 @RestController
@@ -29,17 +30,17 @@ public class MessageController {
     private MessageService service;
     
     @PostMapping
-    public ResponseEntity<MessageOutputDTO> create(@RequestBody MessageInputDTO message){
+    public ResponseEntity<MessageOutputDTO> create(@Valid @RequestBody MessageInputDTO message){
         MessageOutputDTO MessageCriado = service.create(message);
         return new ResponseEntity<MessageOutputDTO>(MessageCriado, HttpStatus.CREATED);
     }
     @PutMapping
-        public ResponseEntity<Message> update(@RequestBody Message message){
+        public ResponseEntity<Message> update(@Valid @RequestBody Message message){
         Message messageUpdate = service.update(message);
         return new ResponseEntity<>(messageUpdate, HttpStatus.OK);
     }
     @GetMapping("/{id}")
-        public ResponseEntity<Message> read (@PathVariable Long id){
+        public ResponseEntity<Message> read (@Valid @PathVariable Long id){
             Message messageBuscado = service.read(id);
             return new ResponseEntity<Message>(messageBuscado,HttpStatus.OK);
     }
@@ -49,7 +50,7 @@ public class MessageController {
             return new ResponseEntity<List<Message>>(listMessages, HttpStatus.OK);
     }
     @DeleteMapping("/{id}")
-        public ResponseEntity<Message> delete( @PathVariable Long id){
+        public ResponseEntity<Message> delete(@Valid @PathVariable Long id){
             service.delete(id);
             return new ResponseEntity<Message>(HttpStatus.NO_CONTENT);
         }

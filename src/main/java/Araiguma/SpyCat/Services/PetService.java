@@ -28,15 +28,16 @@ public class PetService {
         locationRepository.save(location);
 
 
-        Pet pet = new Pet(dto, location);
+        Pet pet = new Pet(dto);
         return repository.save(pet);
     }
 
     @Transactional
-    public Pet update(Pet pet){
-        if(repository.existsById(pet.getId())){
-            return repository.save(pet);
-            
+    public PetOutputDTO update(PetInputDTO pet){
+        Pet petUpdated = new Pet(pet);
+        if(repository.existsById(petUpdated.getId())){
+            PetOutputDTO resposta = new PetOutputDTO (repository.save(petUpdated));
+            return resposta;
         }
         else{
             return null;

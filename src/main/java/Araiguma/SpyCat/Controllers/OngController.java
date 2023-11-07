@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import Araiguma.SpyCat.Models.Ong;
 import Araiguma.SpyCat.Services.OngService;
 import Araiguma.SpyCat.dtos.OngOutputDTO;
+import jakarta.validation.Valid;
 import main.java.Araiguma.SpyCat.dtos.OngInputDTO;
 
 
@@ -29,17 +30,17 @@ public class OngController {
     private OngService service;
     
     @PostMapping
-    public ResponseEntity<OngOutputDTO> create(@RequestBody OngInputDTO ong){
+    public ResponseEntity<OngOutputDTO> create(@Valid @RequestBody OngInputDTO ong){
         OngOutputDTO OngCriado = service.create(ong);
         return new ResponseEntity<OngOutputDTO>(OngCriado, HttpStatus.CREATED);
     }
     @PutMapping
-        public ResponseEntity<Ong> update(@RequestBody Ong ong){
+        public ResponseEntity<Ong> update(@Valid @RequestBody Ong ong){
         Ong ongUpdate = service.update(ong);
         return new ResponseEntity<>(ongUpdate, HttpStatus.OK);
     }
     @GetMapping("/{id}")
-        public ResponseEntity<Ong> read (@PathVariable Long id){
+        public ResponseEntity<Ong> read (@Valid @PathVariable Long id){
             Ong ongBuscado = service.read(id);
             return new ResponseEntity<Ong>(ongBuscado,HttpStatus.OK);
     }

@@ -35,6 +35,7 @@ public class User {
     private String icon;
 
     public User (UserInputDTO dto){
+        this.id = dto.id();
         this.username = dto.username();
         this.password = dto.password();
         this.email = dto.email();

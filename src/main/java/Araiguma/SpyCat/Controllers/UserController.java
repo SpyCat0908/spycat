@@ -2,6 +2,7 @@ package Araiguma.SpyCat.Controllers;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import Araiguma.SpyCat.Models.User;
 import Araiguma.SpyCat.Services.UserService;
 import Araiguma.SpyCat.dtos.UserInputDTO;
+import Araiguma.SpyCat.dtos.UserLoginInputDto;
 import Araiguma.SpyCat.dtos.UserOutputDTO;
+import jakarta.validation.Valid;
 
 
 @RestController
@@ -29,17 +32,22 @@ public class UserController {
     private UserService service;
     
     @PostMapping
-    public ResponseEntity<UserOutputDTO> create(@RequestBody UserInputDTO user){
+    public ResponseEntity<UserOutputDTO> create(@Valid @RequestBody UserInputDTO user){
         UserOutputDTO UserCriado = service.create(user);
         return new ResponseEntity<UserOutputDTO>(UserCriado, HttpStatus.CREATED);
     }
+    @PostMapping("/login")
+    public ResponseEntity<Optional<User>> login(@Valid @RequestBody UserLoginInputDto user ){
+        Optional<User> resposta = service.findByEmail(user.email());
+        return new ResponseEntity<Optional<User>>(resposta, HttpStatus.OK);
+    }
     @PutMapping
-        public ResponseEntity<User> update(@RequestBody User user){
-        User userUpdate = service.update(user);
+        public ResponseEntity<UserOutputDTO> update(@Valid @RequestBody UserInputDTO user){
+        UserOutputDTO userUpdate = service.update(user);
         return new ResponseEntity<>(userUpdate, HttpStatus.OK);
     }
     @GetMapping("/{id}")
-        public ResponseEntity<User> read (@PathVariable Long id){
+        public ResponseEntity<User> read (@Valid @PathVariable Long id){
             User userBuscado = service.read(id);
             return new ResponseEntity<User>(userBuscado,HttpStatus.OK);
     }

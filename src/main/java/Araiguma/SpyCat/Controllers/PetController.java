@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,23 +20,25 @@ import Araiguma.SpyCat.Models.Pet;
 import Araiguma.SpyCat.Services.PetService;
 import Araiguma.SpyCat.dtos.PetInputDTO;
 import Araiguma.SpyCat.dtos.PetOutputDTO;
+import jakarta.validation.Valid;
 
 
 @RestController
 @RequestMapping("/pets")
+@CrossOrigin("*")
 public class PetController {
     @Autowired
 
     private PetService service;
     
     @PostMapping
-    public ResponseEntity<Pet> create(@RequestBody PetInputDTO pet){
+    public ResponseEntity<Pet> create(@Valid @RequestBody PetInputDTO pet){
         Pet PetCriado = service.create(pet);
         return new ResponseEntity<Pet>(PetCriado, HttpStatus.CREATED);
     }
     @PutMapping
-        public ResponseEntity<Pet> update(@RequestBody Pet pet){
-        Pet petUpdate = service.update(pet);
+        public ResponseEntity<PetOutputDTO> update(@Valid @RequestBody PetInputDTO pet){
+        PetOutputDTO petUpdate = service.update(pet);
         return new ResponseEntity<>(petUpdate, HttpStatus.OK);
     }
     @GetMapping("/{id}")

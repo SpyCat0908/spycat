@@ -3,16 +3,19 @@ package Araiguma.SpyCat.dtos;
 import java.time.LocalDateTime;
 
 import Araiguma.SpyCat.Models.Location;
-import Araiguma.SpyCat.Models.Pet;
+import jakarta.validation.constraints.NotNull;
 
 public record LocationOutputDTO(
+    @NotNull
     Long id,
+    @NotNull
     double longitude,
+    @NotNull
     double latitude,
-    LocalDateTime date,
-    Pet pet
+    @NotNull
+    LocalDateTime date
 ) {
     public LocationOutputDTO(Location location){
-        this(location.getId(), location.getLongitude(), location.getLatitude(), location.getDate(), location.getPet());
+        this(location.getId(), location.getLongitude(), location.getLatitude(), location.getDate());
     }
 }

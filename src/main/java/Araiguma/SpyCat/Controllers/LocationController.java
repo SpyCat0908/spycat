@@ -19,6 +19,7 @@ import Araiguma.SpyCat.Models.Location;
 import Araiguma.SpyCat.Services.LocationService;
 import Araiguma.SpyCat.dtos.LocationInpuDTO;
 import Araiguma.SpyCat.dtos.LocationOutputDTO;
+import jakarta.validation.Valid;
 
 
 @RestController
@@ -29,12 +30,12 @@ public class LocationController {
     private LocationService service;
     
     @PostMapping
-    public ResponseEntity<LocationOutputDTO> create(@RequestBody LocationInpuDTO location){
+    public ResponseEntity<LocationOutputDTO> create(@Valid @RequestBody LocationInpuDTO location){
         LocationOutputDTO LocationCriado = service.create(location);
         return new ResponseEntity<LocationOutputDTO>(LocationCriado, HttpStatus.CREATED);
     }
     @PutMapping
-        public ResponseEntity<Location> update(@RequestBody Location location){
+        public ResponseEntity<Location> update(@Valid @RequestBody Location location){
         Location locationUpdate = service.update(location);
         return new ResponseEntity<>(locationUpdate, HttpStatus.OK);
     }
