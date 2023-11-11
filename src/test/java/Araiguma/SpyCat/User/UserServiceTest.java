@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
@@ -14,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.BDDMockito.Then;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,12 +33,12 @@ import Araiguma.SpyCat.dtos.UserOutputDTO;
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
+    
+    @InjectMocks
+    private UserService service;
 
     @Mock
     private UserRepository repositorie;
-
-    @InjectMocks
-    private UserService service;
 
     @Test
     public void readNotFound() throws IOException{
@@ -67,7 +71,7 @@ public class UserServiceTest {
     @Test
     public void createUser() throws IOException{
 
-        UserInputDTO dto = new UserInputDTO( null,"Caio", "Caio123", "caio@gmail.com");
+        UserInputDTO dto = new UserInputDTO( 1l,"Caio", "Caio123", "caio@gmail.com");
 
         User user = new User(dto);
 
@@ -83,7 +87,7 @@ public class UserServiceTest {
     @Test
     public void updateUser() throws IOException{
 
-        UserInputDTO dto = new UserInputDTO( 1l,"Nome", "Senha", "Email");
+        UserInputDTO dto = new UserInputDTO( 1l,"Nome", "Senha", "email@email.com");
         User userUpdate = new User(dto);
 
         when(repositorie.existsById(anyLong())).thenReturn(true);
@@ -94,9 +98,20 @@ public class UserServiceTest {
         assertNotNull(resultado);
         assertEquals(userUpdate.getUsername(), resultado.username());
 
+    }
 
-        
-        
+    @Test 
+    public void deleteUser() throws IOException{
+
+        UserInputDTO dto = new UserInputDTO(1l, "Nome", "Senha", "email@email.com");
+        User userDelete = new User(dto);
+
+        when(repositorie.existsById(anyLong())).thenReturn(true);
+        doNothing().when(repositorie).deleteById(anyLong());
+
+        service.delete(userDelete.getId());
+
+       verify(repositorie, times(1)).deleteById(anyLong());
     }
 
 

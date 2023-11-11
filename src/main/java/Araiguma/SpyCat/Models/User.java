@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Araiguma.SpyCat.dtos.UserInputDTO;
+import Araiguma.SpyCat.dtos.UserLoginInputDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -40,6 +41,11 @@ public class User {
         this.password = dto.password();
         this.email = dto.email();
 
+    }
+
+    public User (UserLoginInputDTO dto){
+        this.email = dto.email();
+        this.password = dto.password();
     }
     
 

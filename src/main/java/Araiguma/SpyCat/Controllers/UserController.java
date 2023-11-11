@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import Araiguma.SpyCat.Models.User;
 import Araiguma.SpyCat.Services.UserService;
 import Araiguma.SpyCat.dtos.UserInputDTO;
-import Araiguma.SpyCat.dtos.UserLoginInputDto;
+import Araiguma.SpyCat.dtos.UserLoginInputDTO;
 import Araiguma.SpyCat.dtos.UserOutputDTO;
 import jakarta.validation.Valid;
 
@@ -37,7 +37,7 @@ public class UserController {
         return new ResponseEntity<UserOutputDTO>(UserCriado, HttpStatus.CREATED);
     }
     @PostMapping("/login")
-    public ResponseEntity<Optional<User>> login(@Valid @RequestBody UserLoginInputDto user ){
+    public ResponseEntity<Optional<User>> login(@Valid @RequestBody UserLoginInputDTO user ){
         Optional<User> resposta = service.findByEmail(user.email());
         return new ResponseEntity<Optional<User>>(resposta, HttpStatus.OK);
     }
