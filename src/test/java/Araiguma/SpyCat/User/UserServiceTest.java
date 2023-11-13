@@ -45,7 +45,7 @@ public class UserServiceTest {
         Long id = (long) 1;
         when(repositorie.existsById(id)).thenReturn(false);
 
-        when(repositorie.findById(id)).thenReturn(Optional.empty());
+        //when(repositorie.findById(id)).thenReturn(Optional.empty());
 
         User resultado = service.read(id);
         assertNull(resultado);
