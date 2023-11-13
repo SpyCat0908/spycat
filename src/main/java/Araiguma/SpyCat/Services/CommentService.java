@@ -11,7 +11,6 @@ import Araiguma.SpyCat.dtos.CommentInputDTO;
 import Araiguma.SpyCat.dtos.CommentOutputDTO;
 import jakarta.transaction.Transactional;
 
-
 @Service
 public class CommentService {
     @Autowired
@@ -20,7 +19,7 @@ public class CommentService {
 
     @Transactional
     public CommentOutputDTO create(CommentInputDTO dto){
-        Comment comment = new Comment(dto);
+        Comment comment = new Comment(dto); 
         repository.save(comment);
         CommentOutputDTO commentAuxiliar = new CommentOutputDTO(comment);
         return commentAuxiliar;

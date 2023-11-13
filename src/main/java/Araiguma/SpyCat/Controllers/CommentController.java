@@ -40,7 +40,7 @@ public class CommentController {
         return new ResponseEntity<>(commentUpdate, HttpStatus.OK);
     }
     @GetMapping("/{id}")
-        public ResponseEntity<Comment> read (@PathVariable Long id){
+        public ResponseEntity<Comment> read (@Valid @PathVariable Long id){
             Comment commentBuscado = service.read(id);
             return new ResponseEntity<Comment>(commentBuscado,HttpStatus.OK);
     }
@@ -50,7 +50,7 @@ public class CommentController {
             return new ResponseEntity<List<Comment>>(listComments, HttpStatus.OK);
     }
     @DeleteMapping("/{id}")
-        public ResponseEntity<Comment> delete( @PathVariable Long id){
+        public ResponseEntity<Comment> delete(@Valid @PathVariable Long id){
             service.delete(id);
             return new ResponseEntity<Comment>(HttpStatus.NO_CONTENT);
         }

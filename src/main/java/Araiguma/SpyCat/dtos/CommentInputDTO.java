@@ -1,13 +1,20 @@
 package Araiguma.SpyCat.dtos;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
-import Araiguma.SpyCat.Models.Message;
-import jakarta.validation.constraints.NotEmpty;
+import Araiguma.SpyCat.Models.Comment;
+import Araiguma.SpyCat.Models.User;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public record CommentInputDTO(
-    @NotEmpty
-    List<Message> messages
+    @NotNull
+    User user,
+    @NotBlank
+    String text,
+    @NotNull
+    LocalDateTime date
+
 ) {
     
 }

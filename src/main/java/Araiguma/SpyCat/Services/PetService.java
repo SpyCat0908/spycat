@@ -3,6 +3,7 @@ package Araiguma.SpyCat.Services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import Araiguma.SpyCat.Models.Location;
@@ -44,7 +45,8 @@ public class PetService {
         }
     } 
     
-    public List<Pet> list(){
+    public List<Pet> list(Pet pet){
+        repository.findAll(Example.of(pet));
         List<Pet> list = (List<Pet>) repository.findAll();
         return list;
     }

@@ -47,8 +47,8 @@ public class PetController {
             return new ResponseEntity<Pet>(petBuscado,HttpStatus.OK);
     }
     @GetMapping
-        public ResponseEntity<List<Pet>> list(){
-            List<Pet> listPets = service.list();
+        public ResponseEntity<List<Pet>> list(Pet pet){
+            List<Pet> listPets = service.list(pet);
             return new ResponseEntity<List<Pet>>(listPets, HttpStatus.OK);
     }
     @DeleteMapping("/{id}")
