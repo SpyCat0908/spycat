@@ -6,7 +6,6 @@ import java.util.List;
 import Araiguma.SpyCat.Enum.Status;
 import Araiguma.SpyCat.dtos.PetInputDTO;
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -18,7 +17,6 @@ import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,7 +27,6 @@ import lombok.NoArgsConstructor;
 public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="pet_id")
     protected long id;
     protected String color;
     protected String specie;
@@ -38,17 +35,23 @@ public class Pet {
     protected String state;
     @Enumerated(EnumType.STRING)
     protected Status status;
+
     @OneToMany(cascade = CascadeType.ALL)
     protected List<Location> locations = new ArrayList<Location>();
     protected List<String> images;
+
+
     @ManyToOne
     @JoinColumn(name ="user_id")
     protected User user;
-    @OneToOne(optional = true)
-    protected Comment comment;
+
+    @OneToMany(mappedBy = "pet")
+    protected List<Comment> comments;
+
 
     
     public Pet(PetInputDTO dto){
+        this.id = dto.id();
         this.color = dto.color();
         this.specie = dto.specie();
         this.description = dto.description();
@@ -56,6 +59,7 @@ public class Pet {
         this.state = dto.state();
         this.images = dto.images();
         this.locations.add(new Location(dto.location()));
+        this.user = dto.user();
     }
 
 

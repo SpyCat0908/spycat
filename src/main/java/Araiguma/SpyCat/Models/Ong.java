@@ -1,5 +1,7 @@
 package Araiguma.SpyCat.Models;
 
+import Araiguma.SpyCat.dtos.OngInputDTO;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,14 +27,15 @@ public class Ong {
     private String phone;
     @Column(nullable = false, unique = true )
     private String email;
-    @OneToOne(optional = false)
+    @OneToOne(cascade =  CascadeType.ALL, optional = false)
     private Location location;
 
-    public Ong(main.java.Araiguma.SpyCat.dtos.OngInputDTO dto){
+    public Ong(OngInputDTO dto){
         this.tradingName = dto.tradingName();
         this.cnpj = dto.cnpj();
         this.phone = dto.phone();
         this.email = dto.email();
+        this.location = new Location(dto.location());
     }
 
 }

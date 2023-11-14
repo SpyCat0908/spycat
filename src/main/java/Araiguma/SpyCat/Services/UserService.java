@@ -37,14 +37,14 @@ public class UserService {
         }
     } 
     
-    public List<User> list(){
-        List<User> list = repository.findAll();
+    public List<UserOutputDTO> list(){
+        List<UserOutputDTO> list = repository.findAll().stream().map(user -> new UserOutputDTO(user)).toList();
         return list;
     }
 
-    public User read(Long id){
+    public UserOutputDTO read(Long id){
         if(repository.existsById(id)){
-            return repository.findById(id).get();
+            return new UserOutputDTO(repository.findById(id).get());
         }
         else{
             return null;

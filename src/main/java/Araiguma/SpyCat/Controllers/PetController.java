@@ -42,14 +42,14 @@ public class PetController {
         return new ResponseEntity<>(petUpdate, HttpStatus.OK);
     }
     @GetMapping("/{id}")
-        public ResponseEntity<Pet> read (@PathVariable Long id){
-            Pet petBuscado = service.read(id);
-            return new ResponseEntity<Pet>(petBuscado,HttpStatus.OK);
+        public ResponseEntity<PetOutputDTO> read (@PathVariable Long id){
+            PetOutputDTO petBuscado = service.read(id);
+            return new ResponseEntity<PetOutputDTO>(petBuscado,HttpStatus.OK);
     }
     @GetMapping
-        public ResponseEntity<List<Pet>> list(Pet pet){
-            List<Pet> listPets = service.list(pet);
-            return new ResponseEntity<List<Pet>>(listPets, HttpStatus.OK);
+        public ResponseEntity<List<PetOutputDTO>> list(){
+            List<PetOutputDTO> listPets = service.list();
+            return new ResponseEntity<List<PetOutputDTO>>(listPets, HttpStatus.OK);
     }
     @DeleteMapping("/{id}")
         public ResponseEntity<Pet> delete( @PathVariable Long id){

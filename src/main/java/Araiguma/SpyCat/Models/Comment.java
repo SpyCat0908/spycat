@@ -7,9 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,19 +18,22 @@ import lombok.NoArgsConstructor;
 public class Comment {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne(optional = false)
+
+    @ManyToOne(optional = false)
     private User user;
+    
     private String text;
     private LocalDateTime date;
+
     @ManyToOne(optional = false)
-    @JoinColumn(name = "comment_id")
-    private Comment comment;
+    private Pet pet;
+
 
     public Comment(CommentInputDTO dto){
-        this.user = dto.user();
+        this.user = new User(dto.user());
         this.text = dto.text();
         this.date = dto.date();
-        
+        this.pet = dto.pet();
     }
     
 }

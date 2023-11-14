@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import Araiguma.SpyCat.Models.Location;
 import Araiguma.SpyCat.Services.LocationService;
-import Araiguma.SpyCat.dtos.LocationInpuDTO;
+import Araiguma.SpyCat.dtos.LocationInputDTO;
 import Araiguma.SpyCat.dtos.LocationOutputDTO;
 import jakarta.validation.Valid;
 
@@ -30,7 +30,7 @@ public class LocationController {
     private LocationService service;
     
     @PostMapping
-    public ResponseEntity<LocationOutputDTO> create(@Valid @RequestBody LocationInpuDTO location){
+    public ResponseEntity<LocationOutputDTO> create(@Valid @RequestBody LocationInputDTO location){
         LocationOutputDTO LocationCriado = service.create(location);
         return new ResponseEntity<LocationOutputDTO>(LocationCriado, HttpStatus.CREATED);
     }

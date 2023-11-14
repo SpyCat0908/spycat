@@ -3,7 +3,6 @@ package Araiguma.SpyCat.dtos;
 import java.time.LocalDateTime;
 
 import Araiguma.SpyCat.Models.Comment;
-import Araiguma.SpyCat.Models.User;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -11,7 +10,7 @@ public record CommentOutputDTO(
     @NotNull
     Long id,
     @NotNull
-    User user,
+    UserMessageOutputDTO user,
     @NotBlank
     String text,
     @NotNull
@@ -19,6 +18,6 @@ public record CommentOutputDTO(
 
 ) {
     public CommentOutputDTO(Comment comment){
-        this(comment.getId(), comment.getUser(), comment.getText(), comment.getDate());
+        this(comment.getId(), new UserMessageOutputDTO(comment.getUser()), comment.getText(), comment.getDate());
     }
 }

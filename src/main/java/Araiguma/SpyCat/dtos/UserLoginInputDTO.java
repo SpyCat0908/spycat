@@ -1,6 +1,5 @@
 package Araiguma.SpyCat.dtos;
 
-import Araiguma.SpyCat.Models.User;
 
 public record UserLoginInputDTO (
     String email,

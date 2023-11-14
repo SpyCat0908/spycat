@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 
 import Araiguma.SpyCat.Models.Ong;
 import Araiguma.SpyCat.Repositories.OngRepository;
+import Araiguma.SpyCat.dtos.OngInputDTO;
 import Araiguma.SpyCat.dtos.OngOutputDTO;
 import jakarta.transaction.Transactional;
-import main.java.Araiguma.SpyCat.dtos.OngInputDTO;
 
 @Service
 public class OngService {

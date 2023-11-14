@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import Araiguma.SpyCat.Models.Comment;
@@ -45,9 +46,9 @@ public class CommentController {
             return new ResponseEntity<Comment>(commentBuscado,HttpStatus.OK);
     }
     @GetMapping
-        public ResponseEntity<List<Comment>> list(){
-            List<Comment> listComments = service.list();
-            return new ResponseEntity<List<Comment>>(listComments, HttpStatus.OK);
+        public ResponseEntity<List<CommentOutputDTO>> list(@RequestParam long id){
+            List<CommentOutputDTO> listComments = service.list(id);
+            return new ResponseEntity<List<CommentOutputDTO>>(listComments, HttpStatus.OK);
     }
     @DeleteMapping("/{id}")
         public ResponseEntity<Comment> delete(@Valid @PathVariable Long id){

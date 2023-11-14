@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import Araiguma.SpyCat.Models.Location;
 import Araiguma.SpyCat.Repositories.LocationRepository;
-import Araiguma.SpyCat.dtos.LocationInpuDTO;
+import Araiguma.SpyCat.dtos.LocationInputDTO;
 import Araiguma.SpyCat.dtos.LocationOutputDTO;
 import jakarta.transaction.Transactional;
 
@@ -18,7 +18,7 @@ public class LocationService {
     private LocationRepository repository;
 
     @Transactional
-    public LocationOutputDTO create(LocationInpuDTO dto){
+    public LocationOutputDTO create(LocationInputDTO dto){
         Location location = new Location(dto);
         repository.save(location);
         LocationOutputDTO locatioAuxiliar = new LocationOutputDTO(location);
