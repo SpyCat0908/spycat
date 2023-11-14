@@ -2,7 +2,6 @@ package Araiguma.SpyCat.dtos;
 
 import java.util.List;
 
-import Araiguma.SpyCat.Models.Pet;
 import Araiguma.SpyCat.Models.User;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
