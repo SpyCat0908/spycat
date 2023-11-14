@@ -1,5 +1,8 @@
 package Araiguma.SpyCat.dtos;
 
+import java.util.List;
+
+import Araiguma.SpyCat.Models.Pet;
 import Araiguma.SpyCat.Models.User;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -16,9 +19,13 @@ public record UserOutputDTO(
     @Email
     String email,
     @NotBlank 
-    String city
+    String city,
+    String icon,
+    List<PetOutputDTO> pet
+
+    // List<PetOutputDTO> pet
 ) {
     public UserOutputDTO(User user){
-        this(user.getId(), user.getUsername(), user.getState(), user.getEmail(), user.getCity());
+        this(user.getId(), user.getUsername(), user.getState(), user.getEmail(), user.getCity(), user.getIcon(), user.getPets().stream().map(pet -> new PetOutputDTO(pet)).toList() );
     }
 }

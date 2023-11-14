@@ -47,14 +47,14 @@ public class UserController {
         return new ResponseEntity<>(userUpdate, HttpStatus.OK);
     }
     @GetMapping("/{id}")
-        public ResponseEntity<User> read (@Valid @PathVariable Long id){
-            User userBuscado = service.read(id);
-            return new ResponseEntity<User>(userBuscado,HttpStatus.OK);
+        public ResponseEntity<UserOutputDTO> read (@Valid @PathVariable Long id){
+            UserOutputDTO userBuscado = service.read(id);
+            return new ResponseEntity<UserOutputDTO>(userBuscado,HttpStatus.OK);
     }
     @GetMapping
-        public ResponseEntity<List<User>> list(){
-            List<User> listUsers = service.list();
-            return new ResponseEntity<List<User>>(listUsers, HttpStatus.OK);
+        public ResponseEntity<List<UserOutputDTO>> list(){
+            List<UserOutputDTO> listUsers = service.list();
+            return new ResponseEntity<List<UserOutputDTO>>(listUsers, HttpStatus.OK);
     }
     @DeleteMapping("/{id}")
         public ResponseEntity<User> delete( @PathVariable Long id){

@@ -36,8 +36,8 @@ public class CommentService {
         }
     } 
     
-    public List<Comment> list(){
-        List<Comment> list = (List<Comment>) repository.findAll();
+    public List<CommentOutputDTO> list(long id){
+        List<CommentOutputDTO> list = repository.findByUser_id(id).stream().map(comment -> new CommentOutputDTO(comment)).toList();
         return list;
     }
 

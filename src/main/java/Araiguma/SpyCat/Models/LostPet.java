@@ -1,7 +1,6 @@
 package Araiguma.SpyCat.Models;
 
 import Araiguma.SpyCat.dtos.LostPetInputDTO;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 import lombok.AllArgsConstructor;

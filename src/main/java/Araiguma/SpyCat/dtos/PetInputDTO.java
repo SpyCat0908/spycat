@@ -3,6 +3,7 @@ package Araiguma.SpyCat.dtos;
 import java.util.List;
 
 import Araiguma.SpyCat.Enum.Status;
+import Araiguma.SpyCat.Models.User;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
@@ -10,6 +11,8 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 public record PetInputDTO(
+    @NotBlank
+    Long id,
     @NotBlank
     String color,
     @NotBlank
@@ -26,7 +29,8 @@ public record PetInputDTO(
     @NotEmpty
     List<String> images,
     @NotNull
-    LocationInpuDTO location
+    LocationInputDTO location,
+    User user
     
 ) {
     

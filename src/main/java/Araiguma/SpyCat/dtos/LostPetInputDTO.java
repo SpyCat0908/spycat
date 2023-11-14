@@ -19,7 +19,7 @@ public record LostPetInputDTO(
     @NotBlank
     String specie,
     @NotEmpty
-    LocationInpuDTO location
+    LocationInputDTO location
 ) {
     
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import Araiguma.SpyCat.dtos.UserInputDTO;
 import Araiguma.SpyCat.dtos.UserLoginInputDTO;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,8 +32,10 @@ public class User {
     private String city;
     // @Column(nullable = false)
     private String state;
+
     @OneToMany(mappedBy = "user")
-    private List<Pet> pets = new ArrayList<Pet>();
+    private List<Pet> pets = new ArrayList<Pet  >();
+
     private String icon;
 
     public User (UserInputDTO dto){
