@@ -27,6 +27,7 @@ public record PetOutputDTO(
     List<CommentOutputDTO> comments
 ) {
     public PetOutputDTO(Pet pet){
-        this(pet.getId(), pet.getState(), pet.getSpecie(), pet.getDescription(), pet.getColor(), pet.getCity(), pet.getImages(), new UserMessageOutputDTO(pet.getUser()),  pet.getLocations().stream().map(location -> new LocationOutputDTO(location)).toList(),  pet.getComments().stream().map(comment -> new CommentOutputDTO(comment)).toList() );
+        // this(pet.getId(), pet.getState(), pet.getSpecie(), pet.getDescription(), pet.getColor(), pet.getCity(), pet.getImages(), new UserMessageOutputDTO(pet.getUser()),  pet.getLocations().stream().map(location -> new LocationOutputDTO(location)).toList(),  pet.getComments().stream().map(comment -> new CommentOutputDTO(comment)).toList() );
+        this(pet.getId(), pet.getState(), pet.getSpecie(), pet.getDescription(), pet.getColor(), pet.getCity(), pet.getImages(), new UserMessageOutputDTO( pet.getUser()),  pet.getLocations().stream().map(location -> new LocationOutputDTO(location)).toList(), pet.getComments().stream().map(comment -> new CommentOutputDTO(comment)).toList());
     }
 }

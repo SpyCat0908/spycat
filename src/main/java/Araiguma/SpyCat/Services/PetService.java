@@ -18,18 +18,13 @@ public class PetService {
     @Autowired
     private PetRepository repository;
 
-    @Autowired
-    private LocationRepository locationRepository;
 
     @Transactional
-    public Pet create(PetInputDTO dto){
-
-        Location location = new Location(dto.location());
-        locationRepository.save(location);
-
+    public PetOutputDTO create(PetInputDTO dto){
 
         Pet pet = new Pet(dto);
-        return repository.save(pet);
+        PetOutputDTO resultado = new PetOutputDTO(repository.save(pet));
+        return resultado;
     }
 
     @Transactional
