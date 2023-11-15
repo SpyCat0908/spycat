@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-SpyCatApplication<SpyCat>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "Araiguma.SpyCat.SpyCatApplication",
+            "projectName": "SpyCat",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
