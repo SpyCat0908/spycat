@@ -46,7 +46,7 @@ public class Pet {
     protected User user;
 
     @OneToMany(mappedBy = "pet")
-    protected List<Comment> comments;
+    protected List<Comment> comments = new ArrayList<Comment>();
 
 
     
@@ -58,6 +58,7 @@ public class Pet {
         this.city = dto.city();
         this.state = dto.state();
         this.images = dto.images();
+        this.status = dto.status();
         this.locations.add(new Location(dto.location()));
         this.user = dto.user();
     }

@@ -2,12 +2,17 @@ package Araiguma.SpyCat.Pet;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -17,7 +22,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import Araiguma.SpyCat.Enum.Status;
+import Araiguma.SpyCat.Models.Location;
 import Araiguma.SpyCat.Models.Pet;
 import Araiguma.SpyCat.Models.User;
 import Araiguma.SpyCat.Repositories.PetRepository;
@@ -25,7 +30,7 @@ import Araiguma.SpyCat.Services.PetService;
 import Araiguma.SpyCat.dtos.LocationInputDTO;
 import Araiguma.SpyCat.dtos.PetInputDTO;
 import Araiguma.SpyCat.dtos.PetOutputDTO;
-import Araiguma.SpyCat.dtos.UserInputDTO;
+import Araiguma.SpyCat.dtos.PetRescueInputDTO;
 
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
@@ -49,8 +54,6 @@ public class PetServiceTest {
 
         PetOutputDTO resultado = service.create(dtoPet);
         assertNotNull(resultado);
-
-
     }
 
     @Test
@@ -71,6 +74,21 @@ public class PetServiceTest {
     assertEquals(pet.getId(), petAtualizado.id());
     assertNotNull(petAtualizado);
     }
+    
+    @Test
+    public void ErrorPetUpdate(){
+        User user = new User();
+        user.setId(1);   
+        LocationInputDTO dtoLocation = new LocationInputDTO((double) 1, (double) 1, LocalDateTime.now());
+        PetInputDTO dto = new PetInputDTO((long) 0, "amarelo", null, null, null, null, null, null, dtoLocation, user);
+
+     when(repository.existsById(anyLong())).thenReturn(false);
+     
+    PetOutputDTO petAtualizado = service.update(dto);
+
+    assertNull(petAtualizado);
+    }
+    
     
     @Test
     public void readFoundPet() throws IOException{
@@ -94,6 +112,99 @@ public class PetServiceTest {
 
         assertNotNull(resultado);
         assertEquals(resultado.color(), pet.getColor());
+    }
+
+    @Test
+    public void readNotFoundPet() throws IOException{
+        Long id = (long) 1;
+
+        when(repository.existsById(anyLong())).thenReturn(false);
+
+        
+        PetOutputDTO resultado = service.read(id);
+
+
+        assertNull(resultado);
+    }
+    @Test 
+    public void SuccesfulDeletePet() throws IOException{
+
+        Pet petDelete = new Pet();
+        petDelete.setId(1l);
+
+        when(repository.existsById(anyLong())).thenReturn(true);
+
+        service.delete(petDelete.getId());
+
+        verify(repository, times(1)).deleteById(1l);
+    }
+    @Test 
+    public void ErrorDeletePet() throws IOException{
+
+        Pet petDelete = new Pet();
+        petDelete.setId(1l);
+
+        when(repository.existsById(anyLong())).thenReturn(false);
+
+        service.delete(petDelete.getId());
+
+        verify(repository, times(0)).deleteById(1l);
+    }
+
+    @Test
+    public void listPet(){
+        List<Pet> listaPets = new ArrayList<Pet>();
+        Pet pet = new Pet();
+        User user = new User();
+        user.setId(1l);
+        pet.setColor("azul");
+        pet.setUser(user);
+        listaPets.add(pet);
+        
+        when(repository.findAll()).thenReturn(listaPets);
+
+        List<PetOutputDTO> resposta = service.list();
+
+        assertNotNull(resposta);
+    }
+
+    @Test
+    public void conversaoOutputDTO(){
+        Pet pet = new Pet();
+        pet.setColor("Aracaju");
+        User user = new User();
+        user.setId(1l);
+
+        pet.setUser(user);
+        PetOutputDTO dto = new PetOutputDTO(pet);
+
+        assertEquals(pet.getColor(), dto.color());
+
+    }
+    @Test
+    public void conversaoInputDTO(){
+        User user = new User();
+        user.setId(1l);
+
+        LocationInputDTO location = new LocationInputDTO(1d, 1d, LocalDateTime.now()); 
+
+        PetInputDTO dto = new PetInputDTO(0l, "azul", null, null, null, null, null, null, location, user);
+
+        Pet pet = new Pet(dto);
+
+
+
+        assertEquals(pet.getColor(), dto.color());
+
+    }
+    @Test
+    public void rescuePet(){
+        User user = new User();
+        user.setId(1l);
+
+        LocationInputDTO location = new LocationInputDTO(1d, 1d, LocalDateTime.now()); 
+
+
     }
 
 }

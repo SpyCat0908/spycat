@@ -5,12 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import Araiguma.SpyCat.Enum.Status;
 import Araiguma.SpyCat.Models.Location;
 import Araiguma.SpyCat.Models.Pet;
 import Araiguma.SpyCat.Repositories.LocationRepository;
 import Araiguma.SpyCat.Repositories.PetRepository;
 import Araiguma.SpyCat.dtos.PetInputDTO;
 import Araiguma.SpyCat.dtos.PetOutputDTO;
+import Araiguma.SpyCat.dtos.PetRescueInputDTO;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -38,10 +40,24 @@ public class PetService {
             return null;
         }
     } 
-    
+    @Transactional
+    public PetOutputDTO rescue(PetRescueInputDTO pet){
+        
+        if(repository.existsById(pet.id())){
+            Pet petAtualizar = repository.findById(pet.id()).get();
+
+            petAtualizar.setStatus(pet.status());
+            Pet resposta = repository.save(petAtualizar);
+
+            return new PetOutputDTO(resposta);
+
+        }
+        return null;
+    }
+
     public List<PetOutputDTO> list(){
         // repository.findAll(Example.of(pet));
-        List<PetOutputDTO> list = repository.findAll().stream().map( pet -> new PetOutputDTO(pet)).toList();
+        List<PetOutputDTO> list = repository.findByStatusNotLike(Status.RESGATADO).stream().map( pet -> new PetOutputDTO(pet)).toList();
         return list;
     }
 

@@ -28,6 +28,7 @@ import Araiguma.SpyCat.Repositories.UserRepository;
 import Araiguma.SpyCat.Services.UserService;
 import Araiguma.SpyCat.dtos.UserInputDTO;
 import Araiguma.SpyCat.dtos.UserOutputDTO;
+import Araiguma.SpyCat.dtos.UserUpdateInputDTO;
 
 
 @SpringBootTest
@@ -87,7 +88,7 @@ public class UserServiceTest {
     @Test
     public void updateUser() throws IOException{
 
-        UserInputDTO dto = new UserInputDTO( 1l,"Nome", "Senha", "email@email.com");
+        UserUpdateInputDTO dto = new UserUpdateInputDTO( 1l,"Nome",  "email@email.com","Senha", null, null, null);
         User userUpdate = new User(dto);
 
         when(repositorie.existsById(anyLong())).thenReturn(true);
