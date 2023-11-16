@@ -5,6 +5,7 @@ import java.util.List;
 
 import Araiguma.SpyCat.dtos.UserInputDTO;
 import Araiguma.SpyCat.dtos.UserLoginInputDTO;
+import Araiguma.SpyCat.dtos.UserUpdateInputDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -50,7 +51,16 @@ public class User {
         this.email = dto.email();
         this.password = dto.password();
     }
-    
+
+    public User (UserUpdateInputDTO dto){
+        this.id = dto.id();
+        this.email = dto.email();
+        this.username = dto.username();
+        this.city = dto.city();
+        this.password = dto.password();
+        this.state = dto.state();
+        this.icon = dto.icon();
+    }
 
 
 }

@@ -2,7 +2,8 @@ package Araiguma.SpyCat.dtos;
 
 import java.time.LocalDateTime;
 
-import Araiguma.SpyCat.Models.Pet;
+import jakarta.validation.constraints.NotNull;
+
 import jakarta.validation.constraints.NotNull;
 
 public record LocationInputDTO(

@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,11 +22,13 @@ import Araiguma.SpyCat.Services.UserService;
 import Araiguma.SpyCat.dtos.UserInputDTO;
 import Araiguma.SpyCat.dtos.UserLoginInputDTO;
 import Araiguma.SpyCat.dtos.UserOutputDTO;
+import Araiguma.SpyCat.dtos.UserUpdateInputDTO;
 import jakarta.validation.Valid;
 
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin("*")
 public class UserController {
     @Autowired
 
@@ -42,7 +45,7 @@ public class UserController {
         return new ResponseEntity<Optional<User>>(resposta, HttpStatus.OK);
     }
     @PutMapping
-        public ResponseEntity<UserOutputDTO> update(@Valid @RequestBody UserInputDTO user){
+        public ResponseEntity<UserOutputDTO> update(@Valid @RequestBody UserUpdateInputDTO user){
         UserOutputDTO userUpdate = service.update(user);
         return new ResponseEntity<>(userUpdate, HttpStatus.OK);
     }

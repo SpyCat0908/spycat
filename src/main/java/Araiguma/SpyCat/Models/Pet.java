@@ -46,7 +46,7 @@ public class Pet {
     protected User user;
 
     @OneToMany(mappedBy = "pet")
-    protected List<Comment> comments = new ArrayList<Comment>();
+    protected List<Comment> comments;
 
 
     

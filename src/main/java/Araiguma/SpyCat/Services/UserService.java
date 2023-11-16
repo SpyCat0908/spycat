@@ -11,6 +11,7 @@ import Araiguma.SpyCat.Models.User;
 import Araiguma.SpyCat.Repositories.UserRepository;
 import Araiguma.SpyCat.dtos.UserInputDTO;
 import Araiguma.SpyCat.dtos.UserOutputDTO;
+import Araiguma.SpyCat.dtos.UserUpdateInputDTO;
 
 @Service
 public class UserService {
@@ -26,7 +27,7 @@ public class UserService {
     }
 
     @Transactional
-    public UserOutputDTO update(UserInputDTO user){
+    public UserOutputDTO update(UserUpdateInputDTO user){
         User userUpdate = new User(user);
         if(repository.existsById(userUpdate.getId())){
             return new UserOutputDTO( repository.save(userUpdate));
