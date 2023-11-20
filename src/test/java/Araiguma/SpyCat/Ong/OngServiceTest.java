@@ -3,13 +3,12 @@ package Araiguma.SpyCat.Ong;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import Araiguma.SpyCat.Models.Location;
 import Araiguma.SpyCat.Models.Ong;
 import Araiguma.SpyCat.Repositories.OngRepository;
 import Araiguma.SpyCat.Services.OngService;
@@ -76,6 +74,29 @@ public class OngServiceTest {
 
         OngOutputDTO result = service.read(id);
         assertNull(result);
+    }
+
+    @Test
+    public void readList() throws IOException{
+
+        List<Ong> listaOngs = new ArrayList<Ong>();
+
+        LocationInputDTO dtoLocation = new LocationInputDTO(1d, 2d, LocalDateTime.now());
+        OngInputDTO dtoOng = new OngInputDTO(1l, "tradingName", "cnpj", "phone", "email", dtoLocation);
+        Ong ong = new Ong(dtoOng);
+
+        listaOngs.add(ong);
+
+        when(repository.findAll()).thenReturn(listaOngs);
+
+        List<Ong> result = repository.findAll();
+        assertNotNull(result);
+    }
+
+    @Test
+    public void conversaoInputDTO() throws IOException{
+        Ong ong = new Ong();
+        
     }
 
 
