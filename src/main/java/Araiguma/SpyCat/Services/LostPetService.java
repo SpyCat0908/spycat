@@ -27,8 +27,8 @@ public class LostPetService {
     }
 
     @Transactional
-    public LostPetOutputDTO update(LostPetUpdateInputDTO lostPet){
-        LostPet lostPetUpdated = new LostPet(lostPet);
+    public LostPetOutputDTO update(LostPetInputDTO dto){
+        LostPet lostPetUpdated = new LostPet(dto);
         if(repository.existsById(lostPetUpdated.getId())){
             LostPetOutputDTO resposta = new LostPetOutputDTO(repository.save(lostPetUpdated));
             return resposta;
@@ -58,5 +58,9 @@ public class LostPetService {
         if(repository.existsById(id)){
             repository.deleteById(id);
         }
+    }
+
+    public LostPetOutputDTO update(LostPetUpdateInputDTO dto) {
+        return null;
     }
 }
