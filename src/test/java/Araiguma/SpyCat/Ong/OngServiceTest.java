@@ -89,14 +89,29 @@ public class OngServiceTest {
 
         when(repository.findAll()).thenReturn(listaOngs);
 
-        List<Ong> result = repository.findAll();
+        List<Ong> result = service.list();
         assertNotNull(result);
     }
 
     @Test
     public void conversaoInputDTO() throws IOException{
-        Ong ong = new Ong();
+        LocationInputDTO dtoLocation = new LocationInputDTO(1d, 2d, LocalDateTime.now());
+        OngInputDTO dtoOng = new OngInputDTO(1l, "tradingName", "cnpj", "phone", "email", dtoLocation);
         
+        Ong ong = new Ong(dtoOng);
+
+        assertEquals(dtoOng.email() , ong.getEmail());
+        
+    }
+
+    @Test
+    public void conversaoOutputDTO() throws IOException{
+        LocationInputDTO dtoLocation = new LocationInputDTO(1d, 2d, LocalDateTime.now());
+        OngInputDTO dtoOng = new OngInputDTO(1l, "tradingName", "cnpj", "phone", "email", dtoLocation);
+        
+        Ong ong = new Ong(dtoOng);
+
+        assertEquals(dtoOng.email() , ong.getEmail());
     }
 
 
