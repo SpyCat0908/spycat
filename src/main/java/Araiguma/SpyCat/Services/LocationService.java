@@ -25,25 +25,15 @@ public class LocationService {
         return locatioAuxiliar;
     }
 
-    @Transactional
-    public Location update(Location location){
-        if(repository.existsById(location.getId())){
-            return repository.save(location);
-            
-        }
-        else{
-            return null;
-        }
-    } 
     
-    public List<Location> list(){
-        List<Location> list = (List<Location>) repository.findAll();
+    public List<LocationOutputDTO> list(){
+        List<LocationOutputDTO> list = repository.findAll().stream().map(location -> new LocationOutputDTO(location)).toList();
         return list;
     }
 
-    public Location read(Long id){
+    public LocationOutputDTO read(Long id){
         if(repository.existsById(id)){
-            return repository.findById(id).get();
+            return new LocationOutputDTO(repository.findById(id).get()); 
         }
         else{
             return null;

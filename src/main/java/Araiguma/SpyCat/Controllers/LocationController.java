@@ -34,20 +34,15 @@ public class LocationController {
         LocationOutputDTO LocationCriado = service.create(location);
         return new ResponseEntity<LocationOutputDTO>(LocationCriado, HttpStatus.CREATED);
     }
-    @PutMapping
-        public ResponseEntity<Location> update(@Valid @RequestBody Location location){
-        Location locationUpdate = service.update(location);
-        return new ResponseEntity<>(locationUpdate, HttpStatus.OK);
-    }
     @GetMapping("/{id}")
-        public ResponseEntity<Location> read (@PathVariable Long id){
-            Location locationBuscado = service.read(id);
-            return new ResponseEntity<Location>(locationBuscado,HttpStatus.OK);
+        public ResponseEntity<LocationOutputDTO> read (@PathVariable Long id){
+            LocationOutputDTO locationBuscado = service.read(id);
+            return new ResponseEntity<LocationOutputDTO>(locationBuscado,HttpStatus.OK);
     }
     @GetMapping
-        public ResponseEntity<List<Location>> list(){
-            List<Location> listLocations = service.list();
-            return new ResponseEntity<List<Location>>(listLocations, HttpStatus.OK);
+        public ResponseEntity<List<LocationOutputDTO>> list(){
+            List<LocationOutputDTO> listLocations = service.list();
+            return new ResponseEntity<List<LocationOutputDTO>>(listLocations, HttpStatus.OK);
     }
     @DeleteMapping("/{id}")
         public ResponseEntity<Location> delete( @PathVariable Long id){
