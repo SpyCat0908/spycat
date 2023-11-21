@@ -39,9 +39,9 @@ public class CommentController {
         return new ResponseEntity<CommentOutputDTO>(CommentCriado, HttpStatus.CREATED);
     }
     @PutMapping
-        public ResponseEntity<Comment> update(@Valid @RequestBody Comment comment){
-        Comment commentUpdate = service.update(comment);
-        return new ResponseEntity<>(commentUpdate, HttpStatus.OK);
+        public ResponseEntity<CommentOutputDTO> update(@Valid @RequestBody CommentInputDTO comment){
+        CommentOutputDTO commentUpdate = service.update(comment);
+        return new ResponseEntity<CommentOutputDTO>(commentUpdate, HttpStatus.OK);
     }
     @GetMapping("/{id}")
         public ResponseEntity<Comment> read (@Valid @PathVariable Long id){

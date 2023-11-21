@@ -3,6 +3,7 @@ package Araiguma.SpyCat.LostPet;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -24,7 +25,7 @@ import Araiguma.SpyCat.Services.LostPetService;
 import Araiguma.SpyCat.dtos.LocationInputDTO;
 import Araiguma.SpyCat.dtos.LostPetInputDTO;
 import Araiguma.SpyCat.dtos.LostPetOutputDTO;
-import Araiguma.SpyCat.dtos.LostPetUpdateInputDTO;
+
 
 @SpringBootTest
 public class LostPetServiceTest {
@@ -72,28 +73,19 @@ public class LostPetServiceTest {
         assertEquals(dto.id(), resultado.id());   
     }
 
-    // @Test
-    // public void ErrorLostPetCreate() throws IOException{
-    //     LostPetInputDTO dto = new LostPetInputDTO(null, null, null, null, null, null, null, null, null);
-    //     LostPet lostPet = new LostPet(dto);
 
-    //     when(repositorie.save(lostPet)).thenReturn(lostPet);
-
-    //     LostPetOutputDTO resultado = service.create(dto);
-        
-    //     assertNull(resultado);
-        
-    // }
 
 
     
     @Test
     public void SuccessfulLostPetUpdate() throws IOException{
-        LostPetUpdateInputDTO dto = new LostPetUpdateInputDTO(1l, "descrição", "cidade", "estado", "email", "telefone", "cor", "especie", null);
+        LocationInputDTO dtoLocation = new LocationInputDTO(1l, (double) 1, (double) 1, LocalDateTime.now());
+        LostPetInputDTO dto = new LostPetInputDTO(1l, "descrição", "cidade", "estado", "email", "telefone", "cor", "especie", dtoLocation);
         LostPet lostPetUpdate = new LostPet(dto);
 
+
         when(repositorie.existsById(anyLong())).thenReturn(true);
-        when(repositorie.save(lostPetUpdate)).thenReturn(lostPetUpdate);
+        when(repositorie.save(any())).thenReturn(lostPetUpdate);
 
         LostPetOutputDTO resultado = service.update(dto);
 
@@ -126,5 +118,17 @@ public class LostPetServiceTest {
         service.delete(lostPetDelete.getId());
 
         verify(repositorie, times(1)).deleteById(1l);
+    }
+
+    @Test 
+    public void ErrorLostPetDelete() throws IOException{
+        LostPet lostPetDelete = new LostPet();
+        lostPetDelete.setId(1l);
+
+        when(repositorie.existsById(anyLong())).thenReturn(false);
+
+        service.delete(lostPetDelete.getId());
+
+        verify(repositorie, times(0)).deleteById(1l);
     }
 }

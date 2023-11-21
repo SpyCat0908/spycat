@@ -9,7 +9,6 @@ import Araiguma.SpyCat.Models.LostPet;
 import Araiguma.SpyCat.Repositories.LostPetRepository;
 import Araiguma.SpyCat.dtos.LostPetInputDTO;
 import Araiguma.SpyCat.dtos.LostPetOutputDTO;
-import Araiguma.SpyCat.dtos.LostPetUpdateInputDTO;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -60,7 +59,5 @@ public class LostPetService {
         }
     }
 
-    public LostPetOutputDTO update(LostPetUpdateInputDTO dto) {
-        return null;
-    }
+   
 }
