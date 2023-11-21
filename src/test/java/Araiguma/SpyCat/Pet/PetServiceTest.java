@@ -48,7 +48,7 @@ public class PetServiceTest {
         User user = new User();
         user.setId(1);
         user.setUsername("Caio");
-        LocationInputDTO dtoLocation = new LocationInputDTO( 1d, 1d, LocalDateTime.now());
+        LocationInputDTO dtoLocation = new LocationInputDTO(1l, 1d, 1d, LocalDateTime.now());
         PetInputDTO dtoPet = new PetInputDTO(0l, null, null, null, null, null, null, null, dtoLocation, user);
         Pet pet = new Pet(dtoPet);
         when(repository.save(pet)).thenReturn(pet);
@@ -61,7 +61,7 @@ public class PetServiceTest {
     public void SuccessfulPetUpdate(){
     User user = new User();
     user.setId(1);   
-    LocationInputDTO dtoLocation = new LocationInputDTO((double) 1, (double) 1, LocalDateTime.now());
+    LocationInputDTO dtoLocation = new LocationInputDTO(1l, (double) 1, (double) 1, LocalDateTime.now());
     PetInputDTO dto = new PetInputDTO((long) 0, "amarelo", null, null, null, null, null, null, dtoLocation, user);
 
      Pet pet = new Pet(dto);
@@ -80,7 +80,7 @@ public class PetServiceTest {
     public void ErrorPetUpdate(){
         User user = new User();
         user.setId(1);   
-        LocationInputDTO dtoLocation = new LocationInputDTO((double) 1, (double) 1, LocalDateTime.now());
+        LocationInputDTO dtoLocation = new LocationInputDTO(1l,(double) 1, (double) 1, LocalDateTime.now());
         PetInputDTO dto = new PetInputDTO((long) 0, "amarelo", null, null, null, null, null, null, dtoLocation, user);
 
      when(repository.existsById(anyLong())).thenReturn(false);
@@ -187,7 +187,7 @@ public class PetServiceTest {
         User user = new User();
         user.setId(1l);
 
-        LocationInputDTO location = new LocationInputDTO(1d, 1d, LocalDateTime.now()); 
+        LocationInputDTO location = new LocationInputDTO(1l, 1d, 1d, LocalDateTime.now()); 
 
         PetInputDTO dto = new PetInputDTO(0l, "azul", null, null, null, null, null, null, location, user);
 
@@ -203,7 +203,7 @@ public class PetServiceTest {
         User user = new User();
         user.setId(1l);
 
-        LocationInputDTO location = new LocationInputDTO(1d, 1d, LocalDateTime.now()); 
+        LocationInputDTO location = new LocationInputDTO(1l,1d, 1d, LocalDateTime.now()); 
 
 
     }

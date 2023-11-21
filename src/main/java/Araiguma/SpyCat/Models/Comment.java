@@ -30,6 +30,7 @@ public class Comment {
 
 
     public Comment(CommentInputDTO dto){
+        this.id = dto.id();
         this.user = dto.user();
         this.text = dto.text();
         this.date = dto.date();

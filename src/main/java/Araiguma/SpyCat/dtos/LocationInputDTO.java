@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotNull;
 
 
 public record LocationInputDTO(
-
+    long id,
     @NotNull
     double longitude,
     @NotNull

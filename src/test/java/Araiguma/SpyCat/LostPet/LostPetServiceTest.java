@@ -106,7 +106,7 @@ public class LostPetServiceTest {
     public void ErrorLostPetUpdate(){
         User user = new User();
         user.setId(1l);
-        LocationInputDTO dtoLocation = new LocationInputDTO((double) 1, (double) 1, LocalDateTime.now());
+        LocationInputDTO dtoLocation = new LocationInputDTO(1l, (double) 1, (double) 1, LocalDateTime.now());
         LostPetInputDTO dto = new LostPetInputDTO((long) 0, "amarelo", null, null, null, null, null, null, dtoLocation);
 
         when(repositorie.existsById(anyLong())).thenReturn(false);

@@ -26,9 +26,10 @@ public class CommentService {
     }
 
     @Transactional
-    public Comment update(Comment comment){
-        if(repository.existsById(comment.getId())){
-            return repository.save(comment);
+    public CommentOutputDTO update(CommentInputDTO comment){
+        if(repository.existsById(comment.id())){
+            Comment commentAuxiliar = new Comment(comment);
+            return new CommentOutputDTO(repository.save(commentAuxiliar));
             
         }
         else{

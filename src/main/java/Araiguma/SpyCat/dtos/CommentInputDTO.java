@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record CommentInputDTO(
+    Long id,
     @NotNull
     User user,
     @NotBlank

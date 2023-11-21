@@ -26,6 +26,7 @@ public class Location{
     private Pet pet;
 
     public Location(LocationInputDTO dto){
+        this.id = dto.id();
         this.longitude = dto.longitude();
         this.latitude = dto.latitude();
         this.date = dto.date();
