@@ -16,10 +16,11 @@ public record OngOutputDTO(
     String phone,
     @NotBlank
     @Email
-    String email
+    String email,
+    LocationOutputDTO location
 )
  {
     public OngOutputDTO(Ong ong){
-        this(ong.getId(), ong.getTradingName(),ong.getCnpj(), ong.getPhone(), ong.getEmail());
+        this(ong.getId(), ong.getTradingName(),ong.getCnpj(), ong.getPhone(), ong.getEmail(), new LocationOutputDTO(ong.getLocation()));
     }
  }

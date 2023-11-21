@@ -60,6 +60,7 @@ public class Pet {
         this.images = dto.images();
         this.locations.add(new Location(dto.location()));
         this.user = dto.user();
+        this.status = dto.status();
     }
 
 
