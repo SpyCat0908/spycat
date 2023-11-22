@@ -3,6 +3,7 @@ package Araiguma.SpyCat.dtos;
 import java.util.List;
 
 import Araiguma.SpyCat.Enum.Status;
+import Araiguma.SpyCat.Models.Image;
 import Araiguma.SpyCat.Models.User;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -27,7 +28,7 @@ public record PetInputDTO(
     @Enumerated(EnumType.STRING)
     Status status,
     @NotEmpty
-    List<String> images,
+    List<Image> images,
     @NotNull
     LocationInputDTO location,
     User user

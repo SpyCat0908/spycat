@@ -5,7 +5,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 
 public record PetRescueInputDTO (
-    Long id,
+    Long id,    
     @Enumerated(EnumType.STRING)
     Status status
 ){

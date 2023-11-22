@@ -2,6 +2,7 @@ package Araiguma.SpyCat.dtos;
 
 import java.util.List;
 
+import Araiguma.SpyCat.Models.Image;
 import Araiguma.SpyCat.Models.Pet;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -21,7 +22,7 @@ public record PetOutputDTO(
     @NotBlank
     String state,
     @NotEmpty
-    List<String> images,
+    List<Image> images,
     UserMessageOutputDTO user,
     List<LocationOutputDTO> locations,
     List<CommentOutputDTO> comments

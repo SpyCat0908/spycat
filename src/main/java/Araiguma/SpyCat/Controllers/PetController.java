@@ -20,6 +20,7 @@ import Araiguma.SpyCat.Models.Pet;
 import Araiguma.SpyCat.Services.PetService;
 import Araiguma.SpyCat.dtos.PetInputDTO;
 import Araiguma.SpyCat.dtos.PetOutputDTO;
+import Araiguma.SpyCat.dtos.PetRescueInputDTO;
 import jakarta.validation.Valid;
 
 
@@ -35,6 +36,11 @@ public class PetController {
     public ResponseEntity<PetOutputDTO> create(@Valid @RequestBody PetInputDTO pet){
         PetOutputDTO PetCriado = service.create(pet);
         return new ResponseEntity<PetOutputDTO>(PetCriado, HttpStatus.CREATED);
+    }
+    @PostMapping("/rescue")
+    public ResponseEntity<PetOutputDTO> rescue(@Valid @RequestBody PetRescueInputDTO pet){
+        PetOutputDTO PetCriado = service.rescue(pet);
+        return new ResponseEntity<PetOutputDTO>(PetCriado, HttpStatus.OK);
     }
     @PutMapping
         public ResponseEntity<PetOutputDTO> update(@Valid @RequestBody PetInputDTO pet){
