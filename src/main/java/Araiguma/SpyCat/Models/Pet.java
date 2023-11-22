@@ -38,7 +38,7 @@ public class Pet {
 
     @OneToMany(cascade = CascadeType.ALL)
     protected List<Location> locations = new ArrayList<Location>();
-    protected List<String> images;
+   
 
 
     @ManyToOne
@@ -47,6 +47,9 @@ public class Pet {
 
     @OneToMany(mappedBy = "pet")
     protected List<Comment> comments = new ArrayList<Comment>();
+
+    @OneToMany
+    protected List<Image> images = new ArrayList<Image>();
 
 
     
@@ -57,7 +60,6 @@ public class Pet {
         this.description = dto.description();
         this.city = dto.city();
         this.state = dto.state();
-        this.images = dto.images();
         this.locations.add(new Location(dto.location()));
         this.user = dto.user();
         this.status = dto.status();
