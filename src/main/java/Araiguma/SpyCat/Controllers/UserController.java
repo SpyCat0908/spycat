@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import Araiguma.SpyCat.Models.User;
@@ -60,8 +61,8 @@ public class UserController {
             return new ResponseEntity<List<UserOutputDTO>>(listUsers, HttpStatus.OK);
     }
     @DeleteMapping("/{id}")
-        public ResponseEntity<User> delete( @PathVariable Long id){
-            service.delete(id);
+        public ResponseEntity<User> delete( @PathVariable Long id, @RequestParam String password){
+            service.delete(id, password);
             return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
         }
 }

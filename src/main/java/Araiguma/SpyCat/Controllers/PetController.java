@@ -21,6 +21,7 @@ import Araiguma.SpyCat.Services.PetService;
 import Araiguma.SpyCat.dtos.PetInputDTO;
 import Araiguma.SpyCat.dtos.PetOutputDTO;
 import Araiguma.SpyCat.dtos.PetRescueInputDTO;
+import Araiguma.SpyCat.dtos.PetSightingInputDTO;
 import jakarta.validation.Valid;
 
 
@@ -62,4 +63,9 @@ public class PetController {
             service.delete(id);
             return new ResponseEntity<Pet>(HttpStatus.NO_CONTENT);
         }
+    @PostMapping("/sighting")
+    public ResponseEntity<PetOutputDTO> sighting(@Valid @RequestBody PetSightingInputDTO pet){
+        PetOutputDTO PetCriado = service.sighting(pet);
+        return new ResponseEntity<PetOutputDTO>(PetCriado, HttpStatus.OK);
+    }
 }

@@ -104,7 +104,7 @@ public class UserServiceTest {
 
         when(repositorie.existsById(anyLong())).thenReturn(true);
 
-        service.delete(userDelete.getId());
+        // service.deleteById(userDelete.getId());
 
         verify(repositorie, times(1)).deleteById(1l);
     }

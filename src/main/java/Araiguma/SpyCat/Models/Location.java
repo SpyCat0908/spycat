@@ -14,7 +14,7 @@ import lombok.*;
 @Entity
 @Data @AllArgsConstructor @NoArgsConstructor
 public class Location{
-@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private double longitude;
