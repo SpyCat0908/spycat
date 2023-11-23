@@ -2,6 +2,7 @@ package Araiguma.SpyCat.Models;
 
 import java.time.LocalDate;
 
+import Araiguma.SpyCat.dtos.ImageInputDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,7 +20,12 @@ public class Image {
     private String url;
     private LocalDate date;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Pet pet;
     
+    public Image(ImageInputDTO dto){
+        this.id = dto.id();
+        this.url = dto.url();
+        this.date = dto.date();
+    }
 }
