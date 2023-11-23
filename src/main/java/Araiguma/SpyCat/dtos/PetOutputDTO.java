@@ -22,12 +22,12 @@ public record PetOutputDTO(
     @NotBlank
     String state,
     @NotEmpty
-    List<Image> images,
+    List<ImageOutputDTO> images,
     UserMessageOutputDTO user,
     List<LocationOutputDTO> locations,
     List<CommentOutputDTO> comments
 ) {
     public PetOutputDTO(Pet pet){
-        this(pet.getId(), pet.getDescription(), pet.getColor(), pet.getSpecie(), pet.getCity(), pet.getState(), pet.getImages(), new UserMessageOutputDTO(pet.getUser()),  pet.getLocations().stream().map(location -> new LocationOutputDTO(location)).toList(),  pet.getComments().stream().map(comment -> new CommentOutputDTO(comment)).toList() );
+        this(pet.getId(), pet.getDescription(), pet.getColor(), pet.getSpecie(), pet.getCity(), pet.getState(), pet.getImages().stream().map(image-> new ImageOutputDTO(image)).toList(), new UserMessageOutputDTO(pet.getUser()),  pet.getLocations().stream().map(location -> new LocationOutputDTO(location)).toList(),  pet.getComments().stream().map(comment -> new CommentOutputDTO(comment)).toList() );
     }
 }

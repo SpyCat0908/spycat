@@ -13,15 +13,13 @@ import Araiguma.SpyCat.Repositories.PetRepository;
 import Araiguma.SpyCat.dtos.PetInputDTO;
 import Araiguma.SpyCat.dtos.PetOutputDTO;
 import Araiguma.SpyCat.dtos.PetRescueInputDTO;
+import Araiguma.SpyCat.dtos.PetSightingInputDTO;
 import jakarta.transaction.Transactional;
 
 @Service
 public class PetService {
     @Autowired
     private PetRepository repository;
-
-    @Autowired
-    private LocationRepository locationRepository;
 
     @Transactional
     public PetOutputDTO create(PetInputDTO dto){
@@ -70,6 +68,21 @@ public class PetService {
         }
           }
 
+public PetOutputDTO sighting(PetSightingInputDTO dto){
+    if(repository.existsById(dto.id())){
+        Pet pet = repository.findById(dto.id()).get();
+        if (dto.image().url() != null) {
+            pet.setImages(dto.image());
+        }
+        pet.setLocation(dto.location());
+
+        return new PetOutputDTO(repository.save(pet));
+        
+    }   
+    else{
+        return null;
+    }
+}
 
     public void delete(Long id){
         if(repository.existsById(id)){

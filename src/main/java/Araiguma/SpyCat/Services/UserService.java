@@ -3,11 +3,14 @@ package Araiguma.SpyCat.Services;
 import java.util.List;
 import java.util.Optional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import Araiguma.SpyCat.Models.Comment;
 import Araiguma.SpyCat.Models.User;
+import Araiguma.SpyCat.Repositories.CommentRepository;
 import Araiguma.SpyCat.Repositories.UserRepository;
 import Araiguma.SpyCat.dtos.UserInputDTO;
 import Araiguma.SpyCat.dtos.UserOutputDTO;
@@ -17,6 +20,8 @@ import Araiguma.SpyCat.dtos.UserUpdateInputDTO;
 public class UserService {
     @Autowired
     private UserRepository repository;
+    @Autowired
+    private CommentRepository commentRepository;
 
     @Transactional
     public UserOutputDTO create(UserInputDTO dto){
@@ -54,9 +59,16 @@ public class UserService {
     }
 
 
-    public void delete(Long id){
+    public void delete(Long id, String password){
         if(repository.existsById(id)){
-            repository.deleteById(id);
+       
+            
+            User user = repository.findById(id).get();
+            if(user.getPassword().equals(password)){
+                
+                repository.deleteById(id);
+
+            }
         }
     }
 

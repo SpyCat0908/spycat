@@ -3,8 +3,14 @@ package Araiguma.SpyCat.Models;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import Araiguma.SpyCat.Enum.Status;
+import Araiguma.SpyCat.dtos.ImageInputDTO;
+import Araiguma.SpyCat.dtos.LocationInputDTO;
 import Araiguma.SpyCat.dtos.PetInputDTO;
+import Araiguma.SpyCat.dtos.PetSightingInputDTO;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -39,17 +45,15 @@ public class Pet {
     @OneToMany(cascade = CascadeType.ALL)
     protected List<Location> locations = new ArrayList<Location>();
    
-
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
+    protected List<Image> images = new ArrayList<Image>();
 
     @ManyToOne
     @JoinColumn(name ="user_id")
     protected User user;
 
-    @OneToMany(mappedBy = "pet")
+    @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL)
     protected List<Comment> comments = new ArrayList<Comment>();
-
-    @OneToMany(cascade = CascadeType.ALL)
-    protected List<Image> images = new ArrayList<Image>();
 
 
     
@@ -65,6 +69,18 @@ public class Pet {
         this.status = dto.status();
         this.images = dto.images();
     }
+    public Pet(PetSightingInputDTO dto){
+        this.id = dto.id();
+        this.locations.add(new Location(dto.location()));
+        this.images.add(new Image(dto.image()));
 
+    }
 
+    
+    public void setImages(ImageInputDTO image){
+        this.images.add(new Image(image));
+    }
+    public void setLocation(LocationInputDTO location){
+        this.locations.add(new Location(location));
+    }
 }
