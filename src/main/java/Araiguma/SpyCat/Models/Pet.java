@@ -45,7 +45,7 @@ public class Pet {
     @OneToMany(cascade = CascadeType.ALL)
     protected List<Location> locations = new ArrayList<Location>();
    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pet")
+    @OneToMany(cascade = CascadeType.ALL)
     protected List<Image> images = new ArrayList<Image>();
 
     @ManyToOne
@@ -67,7 +67,8 @@ public class Pet {
         this.locations.add(new Location(dto.location()));
         this.user = dto.user();
         this.status = dto.status();
-        this.images = dto.images();
+        this.images = dto.images().stream().map(image-> new Image(image)).toList();
+        // this.images.add(new Image(dto.images()));
     }
     public Pet(PetSightingInputDTO dto){
         this.id = dto.id();

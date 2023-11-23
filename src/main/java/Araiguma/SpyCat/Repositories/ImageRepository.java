@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import Araiguma.SpyCat.Models.Image;
 
-public interface ImageRepository extends JpaRepository<Image, Long>{
+
+public interface ImageRepository extends JpaRepository<Image,Long> {
     
 }

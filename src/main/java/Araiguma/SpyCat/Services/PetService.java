@@ -71,7 +71,7 @@ public class PetService {
 public PetOutputDTO sighting(PetSightingInputDTO dto){
     if(repository.existsById(dto.id())){
         Pet pet = repository.findById(dto.id()).get();
-        if (dto.image().url() != null) {
+        if (dto.image() != null) {
             pet.setImages(dto.image());
         }
         pet.setLocation(dto.location());

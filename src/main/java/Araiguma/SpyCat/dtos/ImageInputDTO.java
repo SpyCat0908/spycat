@@ -6,9 +6,7 @@ import jakarta.validation.constraints.NotNull;
 
 public record ImageInputDTO (
     Long id, 
-    String url, 
-    @NotNull
-    LocalDate date
+    String url
 ) {
     
 }
