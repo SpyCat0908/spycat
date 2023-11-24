@@ -11,7 +11,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 public record PetInputDTO(
-    @NotBlank
+    @NotNull
     Long id,
     @NotBlank
     String color,
@@ -23,7 +23,7 @@ public record PetInputDTO(
     String city,
     @NotBlank
     String state,
-    @NotBlank
+    
     @Enumerated(EnumType.STRING)
     Status status,
     

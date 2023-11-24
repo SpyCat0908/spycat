@@ -10,17 +10,21 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import Araiguma.SpyCat.Models.RefreshToken;
 import Araiguma.SpyCat.Models.User;
+import Araiguma.SpyCat.Repositories.UserRepository;
 import Araiguma.SpyCat.Services.RefreshTokenService;
 import Araiguma.SpyCat.Services.TokenService;
+import Araiguma.SpyCat.Services.UserService;
 import Araiguma.SpyCat.dtos.RefreshTokenDTO;
 import Araiguma.SpyCat.dtos.TokenDTO;
 import Araiguma.SpyCat.dtos.UserLoginInputDTO;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
 
+@RestController
 public class LoginController {
     @Autowired
     private AuthenticationManager manager;
@@ -30,6 +34,8 @@ public class LoginController {
 
     @Autowired
     private TokenService tokenService;
+    @Autowired
+    private UserRepository repository;
 
     @PostMapping("/login")
     public ResponseEntity<TokenDTO> login(@RequestBody @Valid UserLoginInputDTO dados) {
@@ -40,8 +46,9 @@ public class LoginController {
         var token = tokenService.gerarToken((UserDetails) authentication.getPrincipal());
         var user = (UserDetails) authentication.getPrincipal();
         var refreshToken = refreshTokenService.createRefreshToken(user, token);
+        var UserAchado = repository.findByEmail(dados.email());
         return new ResponseEntity<TokenDTO>(
-                new TokenDTO(token, refreshToken.getRefreshToken(), user.getUsername()),
+                new TokenDTO(token, refreshToken.getRefreshToken(), user.getUsername(), UserAchado.getId(), UserAchado.getIcon()),
                 HttpStatus.CREATED);
     }
 
@@ -59,7 +66,7 @@ public class LoginController {
         String token = tokenService.gerarToken(usuario);
         refreshTokenService.deleteByUser(usuario);
         RefreshToken refreshToken = refreshTokenService.createRefreshToken(usuario, token);
-        return ResponseEntity.ok(new TokenDTO(token, refreshToken.getRefreshToken(), usuario.getEmail()));
+        return ResponseEntity.ok(new TokenDTO(token, refreshToken.getRefreshToken(), usuario.getEmail(), usuario.getId(), usuario.getIcon()));
     }
 
     @DeleteMapping("/revoke")

@@ -1,5 +1,7 @@
 package Araiguma.SpyCat.dtos;
 
+import org.hibernate.validator.constraints.br.CNPJ;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -11,8 +13,8 @@ public record OngInputDTO(
     @NotBlank
     String tradingName,
     @NotBlank
-    @Min(14)
-    @Max(14)
+    
+    @CNPJ
     String cnpj,
     @NotBlank
     String phone,

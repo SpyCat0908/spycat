@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import Araiguma.SpyCat.Models.RefreshToken;
@@ -14,6 +15,7 @@ import Araiguma.SpyCat.Models.User;
 import Araiguma.SpyCat.Repositories.RefreshTokenRepository;
 import Araiguma.SpyCat.Repositories.UserRepository;
 
+@Service
 public class RefreshTokenService {
     @Value("${api.security.refresh.expiration_sec}")
     private String refreshTokenDurationS;

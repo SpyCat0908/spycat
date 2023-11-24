@@ -27,12 +27,11 @@ public class TokenService {
 
     public String gerarToken(UserDetails user) {
         try {
-            String stringId = (((ZoneId) user).getId());
             var algoritmo = Algorithm.HMAC256(secret);
             return JWT
                     .create()
                     .withIssuer(issuer)
-                    .withSubject(stringId)
+                    .withSubject(user.getUsername())
                     .withExpiresAt(dataExpiracao())
                     .sign(algoritmo);
         } catch (JWTCreationException exception) {
