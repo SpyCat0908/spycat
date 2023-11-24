@@ -2,9 +2,11 @@ package Araiguma.SpyCat.Services;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZoneOffset;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.auth0.jwt.JWT;
@@ -23,9 +25,9 @@ public class TokenService {
     @Value("${api.security.token.expiration_min}")
     private String expirationMin;
 
-    public String gerarToken(User user) {
+    public String gerarToken(UserDetails user) {
         try {
-            String stringId = Long.toString(user.getId());
+            String stringId = (((ZoneId) user).getId());
             var algoritmo = Algorithm.HMAC256(secret);
             return JWT
                     .create()

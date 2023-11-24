@@ -5,6 +5,10 @@ import java.util.Optional;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +21,7 @@ import Araiguma.SpyCat.dtos.UserOutputDTO;
 import Araiguma.SpyCat.dtos.UserUpdateInputDTO;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository repository;
     @Autowired
@@ -25,7 +29,9 @@ public class UserService {
 
     @Transactional
     public UserOutputDTO create(UserInputDTO dto){
+        String password = new BCryptPasswordEncoder().encode(dto.password());
         User user = new User(dto);
+        user.setPassword(password);
         repository.save(user);
         UserOutputDTO userAuxiliar = new UserOutputDTO(user);
         return userAuxiliar;
@@ -84,9 +90,19 @@ public class UserService {
 
     // }
 
-    public Optional<User> findByEmail(String email){
-        return repository.findByEmail(email);
-     }
+
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = repository.findByEmail(email);
+        if(user != null){
+            return org.springframework.security.core.userdetails.User.builder()
+                .password(user.getPassword())
+                .username(user.getUsername())
+            .build();
+        }else{
+            throw new UsernameNotFoundException("");
+        }
+    }
  
     
 }

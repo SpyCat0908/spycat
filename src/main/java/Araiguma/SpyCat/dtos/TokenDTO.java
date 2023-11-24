@@ -1,6 +1,8 @@
 package Araiguma.SpyCat.dtos;
 
 public record TokenDTO(
-    String token
+    String token,
+    String refreshToken,
+    String email
 ) {
 }

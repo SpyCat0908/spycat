@@ -40,11 +40,7 @@ public class UserController {
         UserOutputDTO UserCriado = service.create(user);
         return new ResponseEntity<UserOutputDTO>(UserCriado, HttpStatus.CREATED);
     }
-    @PostMapping("/login")
-    public ResponseEntity<Optional<User>> login(@Valid @RequestBody UserLoginInputDTO user ){
-        Optional<User> resposta = service.findByEmail(user.email());
-        return new ResponseEntity<Optional<User>>(resposta, HttpStatus.OK);
-    }
+    
     @PutMapping
         public ResponseEntity<UserOutputDTO> update(@Valid @RequestBody UserUpdateInputDTO user){
         UserOutputDTO userUpdate = service.update(user);
