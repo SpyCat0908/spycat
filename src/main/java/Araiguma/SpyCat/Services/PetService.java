@@ -3,12 +3,12 @@ package Araiguma.SpyCat.Services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import Araiguma.SpyCat.Enum.Status;
 import Araiguma.SpyCat.Models.Location;
 import Araiguma.SpyCat.Models.Pet;
-import Araiguma.SpyCat.Repositories.LocationRepository;
 import Araiguma.SpyCat.Repositories.PetRepository;
 import Araiguma.SpyCat.dtos.PetInputDTO;
 import Araiguma.SpyCat.dtos.PetOutputDTO;
@@ -53,9 +53,9 @@ public class PetService {
         return null;
     }
 
-    public List<PetOutputDTO> list(){
+    public List<PetOutputDTO> list(Pageable page){
         // repository.findAll(Example.of(pet));
-        List<PetOutputDTO> list = repository.findByStatusNotLike(Status.RESGATADO).stream().map( pet -> new PetOutputDTO(pet)).toList();
+        List<PetOutputDTO> list = repository.findByStatusNotLike(Status.RESGATADO ,page).stream().map( pet -> new PetOutputDTO(pet)).toList();
         return list;
     }
 

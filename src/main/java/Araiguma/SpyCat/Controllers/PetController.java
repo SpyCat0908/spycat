@@ -4,6 +4,7 @@ package Araiguma.SpyCat.Controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -54,8 +55,8 @@ public class PetController {
             return new ResponseEntity<PetOutputDTO>(petBuscado,HttpStatus.OK);
     }
     @GetMapping
-        public ResponseEntity<List<PetOutputDTO>> list(){
-            List<PetOutputDTO> listPets = service.list();
+        public ResponseEntity<List<PetOutputDTO>> list( Pageable page){
+            List<PetOutputDTO> listPets = service.list(page);
             return new ResponseEntity<List<PetOutputDTO>>(listPets, HttpStatus.OK);
     }
     @DeleteMapping("/{id}")
