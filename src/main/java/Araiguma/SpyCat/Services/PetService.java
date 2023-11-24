@@ -29,9 +29,25 @@ public class PetService {
 
     @Transactional
     public PetOutputDTO update(PetInputDTO pet){
-        Pet petUpdated = new Pet(pet);
-        if(repository.existsById(petUpdated.getId())){
-            PetOutputDTO resposta = new PetOutputDTO (repository.save(petUpdated));
+        if(repository.existsById(dto.id())){
+            Pet pet = repository.findById(dto.id()).get();
+            if (!dto.color().isEmpty()) {
+                pet.setColor(dto.color());
+            }
+            if (!dto.specie().isEmpty()) {
+                pet.setSpecie(dto.specie());
+            }
+            if (!dto.description().isEmpty()) {
+                pet.setDescription(dto.description());
+            }
+            if (!dto.city().isEmpty()) {
+                pet.setCity(dto.city());
+            }
+            if (!dto.state().isEmpty()) {
+                pet.setState(dto.state());
+            }
+
+            PetOutputDTO resposta = new PetOutputDTO (repository.save(pet));
             return resposta;
         }
         else{
