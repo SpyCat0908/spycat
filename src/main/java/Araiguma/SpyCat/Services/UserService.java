@@ -13,8 +13,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import Araiguma.SpyCat.Models.Comment;
+import Araiguma.SpyCat.Models.PasswordResetToken;
 import Araiguma.SpyCat.Models.User;
 import Araiguma.SpyCat.Repositories.CommentRepository;
+import Araiguma.SpyCat.Repositories.PasswordResetTokenRepository;
 import Araiguma.SpyCat.Repositories.UserRepository;
 import Araiguma.SpyCat.dtos.UserInputDTO;
 import Araiguma.SpyCat.dtos.UserOutputDTO;
@@ -26,7 +28,9 @@ public class UserService implements UserDetailsService {
     private UserRepository repository;
     @Autowired
     private CommentRepository commentRepository;
-
+    @Autowired
+    private PasswordResetTokenRepository passwordResetTokenRepository;
+    
     @Transactional
     public UserOutputDTO create(UserInputDTO dto){
         String password = new BCryptPasswordEncoder().encode(dto.password());
@@ -84,7 +88,9 @@ public class UserService implements UserDetailsService {
         }
       
     }
-
+    public User findUserBypasswordResetToken(String token){
+        return repository.findByPasswordResetToken_token(token);
+    }
 
     public void delete(Long id, String password){
         if(repository.existsById(id)){
@@ -98,8 +104,31 @@ public class UserService implements UserDetailsService {
             }
         }
     }
+    public void changeUserPassword(User user, String password) {
+        String passwordEncriptada = new BCryptPasswordEncoder().encode(password);
+        user.setPassword(passwordEncriptada);
+        repository.save(user);
+    }
+    
+        public void createPasswordResetTokenForUser(User user, String token) {
+    if(user.getPasswordResetToken().getToken().isEmpty()){
 
+        PasswordResetToken myToken = new PasswordResetToken();
+        myToken.setUser(user);
+        myToken.setToken(token);
+        user.setPasswordResetToken(passwordResetTokenRepository.save(myToken));
+        repository.save(user);
+    }
+    else{
+        
+        PasswordResetToken myToken = passwordResetTokenRepository.findById(user.getPasswordResetToken().getId()).get();
+        
+        myToken.setToken(token);
+        user.setPasswordResetToken(passwordResetTokenRepository.save(myToken));
+        repository.save(user);
 
+    }
+}
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

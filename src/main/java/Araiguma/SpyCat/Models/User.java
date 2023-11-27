@@ -18,6 +18,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -38,6 +39,8 @@ public class User implements UserDetails{
     private String city;
     // @Column(nullable = false)
     private String state;
+    @OneToOne
+    private PasswordResetToken passwordResetToken;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Pet> pets = new ArrayList<Pet>();
