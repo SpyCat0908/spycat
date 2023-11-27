@@ -39,8 +39,29 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public UserOutputDTO update(UserUpdateInputDTO user){
-        User userUpdate = new User(user);
-        if(repository.existsById(userUpdate.getId())){
+
+        if(repository.existsById(user.id())){
+
+            User userUpdate = repository.findById(user.id()).get();
+            if(user.email() != null && !user.email().isEmpty()){
+                userUpdate.setEmail(user.email());
+            }
+            if(user.username() != null&& !user.username().isEmpty()){
+                userUpdate.setUsername(user.username());
+            }
+            if(user.city() != null && !user.city().isEmpty()){
+                userUpdate.setCity(user.city());
+            }
+            if(user.state() != null && !user.state().isEmpty()){
+                userUpdate.setState(user.state());
+            }
+            if(user.icon() != null&& !user.icon().isEmpty()){
+                userUpdate.setIcon(user.icon());
+            }
+            if(user.password() != null&& !user.password().isEmpty()){
+                String password = new BCryptPasswordEncoder().encode(user.password());
+                userUpdate.setPassword(password);
+            }
             return new UserOutputDTO( repository.save(userUpdate));
             
         }
@@ -78,17 +99,6 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    // public Boolean login(String email, String password){
-    //     User userLogado = repository.findBy(email);
-
-    //     if(userLogado.getEmail() == email && userLogado.getPassword() == password){
-    //         return true;
-    //     }
-    //     else{
-    //         return false;
-    //     }
-
-    // }
 
 
     @Override

@@ -28,7 +28,7 @@ public class PetService {
     }
 
     @Transactional
-    public PetOutputDTO update(PetInputDTO pet){
+    public PetOutputDTO update(PetInputDTO dto){
         if(repository.existsById(dto.id())){
             Pet pet = repository.findById(dto.id()).get();
             if (!dto.color().isEmpty()) {
