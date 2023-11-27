@@ -57,6 +57,8 @@ public class SecurityConfig {
                     requests
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/savePassword").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/forgot-password").permitAll()
                         .requestMatchers(HttpMethod.POST, "/refresh").permitAll()
                         .requestMatchers(HttpMethod.GET, "/pets/{id}").permitAll()
                         .requestMatchers(HttpMethod.GET, "/pets").permitAll()

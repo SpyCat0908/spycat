@@ -8,4 +8,5 @@ import Araiguma.SpyCat.Models.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
     User findByEmail(String email);
+    User findByPasswordResetToken_token(String token);
 }
