@@ -26,6 +26,6 @@ public record UserOutputDTO(
     // List<PetOutputDTO> pet
 ) {
     public UserOutputDTO(User user){
-        this(user.getId(), user.getUsername(), user.getState(), user.getEmail(), user.getCity(), user.getIcon(), user.getPets().stream().map(pet -> new PetOutputDTO(pet)).toList() );
+        this(user.getId(), user.getUsernameReal(), user.getState(), user.getEmail(), user.getCity(), user.getIcon(), user.getPets().stream().map(pet -> new PetOutputDTO(pet)).toList() );
     }
 }

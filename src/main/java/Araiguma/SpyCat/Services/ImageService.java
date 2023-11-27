@@ -5,12 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import Araiguma.SpyCat.Enum.Status;
 import Araiguma.SpyCat.Models.Image;
 import Araiguma.SpyCat.Repositories.ImageRepository;
 import Araiguma.SpyCat.dtos.ImageInputDTO;
 import Araiguma.SpyCat.dtos.ImageOutputDTO;
-
 import jakarta.transaction.Transactional;
 
 @Service

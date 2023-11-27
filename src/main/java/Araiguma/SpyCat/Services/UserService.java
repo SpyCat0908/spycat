@@ -1,8 +1,8 @@
 package Araiguma.SpyCat.Services;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
-import java.util.Optional;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +12,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import Araiguma.SpyCat.Models.Comment;
 import Araiguma.SpyCat.Models.PasswordResetToken;
 import Araiguma.SpyCat.Models.User;
 import Araiguma.SpyCat.Repositories.CommentRepository;
@@ -111,11 +110,13 @@ public class UserService implements UserDetailsService {
     }
     
         public void createPasswordResetTokenForUser(User user, String token) {
-    if(user.getPasswordResetToken().getToken().isEmpty()){
-
+    if (user.getPasswordResetToken() == null) {
         PasswordResetToken myToken = new PasswordResetToken();
         myToken.setUser(user);
         myToken.setToken(token);
+        myToken.setExpiryDate(LocalDateTime.now()
+        .plusMinutes(5l)
+        .toInstant(ZoneOffset.of("-03:00")));
         user.setPasswordResetToken(passwordResetTokenRepository.save(myToken));
         repository.save(user);
     }

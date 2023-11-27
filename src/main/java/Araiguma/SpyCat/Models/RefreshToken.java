@@ -2,7 +2,6 @@ package Araiguma.SpyCat.Models;
 
 import java.time.Instant;
 
-import Araiguma.SpyCat.dtos.TokenDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

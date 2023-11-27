@@ -3,9 +3,6 @@ package Araiguma.SpyCat.Models;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 import Araiguma.SpyCat.Enum.Status;
 import Araiguma.SpyCat.dtos.ImageInputDTO;
 import Araiguma.SpyCat.dtos.LocationInputDTO;

@@ -1,5 +1,7 @@
 package Araiguma.SpyCat.Controllers;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,7 +98,7 @@ public class LoginController {
     
             String conteudo = new String("Para resetar a sua senha, é necessário clicar neste link: http://localhost:3000/ChangePassword?token=" + token);
             
-            emailSenderService.enviar("guiqsassi@gmail.com", "Senha esquecida", conteudo);
+            emailSenderService.enviar(user.getEmail(), "Senha esquecida", conteudo);
             return new ResponseEntity<>(token,HttpStatus.OK);
         }
         else{
@@ -106,12 +108,21 @@ public class LoginController {
     
 }
         @PostMapping("/savePassword")
-    public UserOutputDTO savePassword( @RequestBody PasswordResetDTO dto){
+    public ResponseEntity<UserOutputDTO> savePassword( @RequestBody PasswordResetDTO dto){
         User user = userService.findUserBypasswordResetToken(dto.token());
+
         if(!user.getEmail().isEmpty()) {
-            userService.changeUserPassword(user, dto.password());
+            if(user.getPasswordResetToken().getExpiryDate().isAfter(Instant.now())){
+                userService.changeUserPassword(user, dto.password());
+                return new ResponseEntity<UserOutputDTO>(new UserOutputDTO(user), HttpStatus.OK);
+
+            }
         }
-        return new UserOutputDTO(user);
+        else{
+            return new ResponseEntity<UserOutputDTO>(HttpStatus.NOT_MODIFIED);
+        }
+        return null;
     }
+    
 
 }

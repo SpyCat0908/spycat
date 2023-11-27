@@ -7,7 +7,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import Araiguma.SpyCat.Enum.Status;
-import Araiguma.SpyCat.Models.Location;
 import Araiguma.SpyCat.Models.Pet;
 import Araiguma.SpyCat.Repositories.PetRepository;
 import Araiguma.SpyCat.dtos.PetInputDTO;
