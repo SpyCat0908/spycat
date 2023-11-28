@@ -88,6 +88,7 @@ public class LoginController {
         refreshTokenService.deleteByUser(usuario);
         return ResponseEntity.noContent().build();
     }
+
         @PostMapping("/forgot-password")
     public ResponseEntity<String> forgotPassword(@RequestParam String email){
         User user = repository.findByEmail(email);
@@ -112,7 +113,7 @@ public class LoginController {
         User user = userService.findUserBypasswordResetToken(dto.token());
 
         if(!user.getEmail().isEmpty()) {
-            if(user.getPasswordResetToken().getExpiryDate().isAfter(Instant.now())){
+            if(user.getPasswordResetToken().getExpiryDate().isBefore(Instant.now())){
                 userService.changeUserPassword(user, dto.password());
                 return new ResponseEntity<UserOutputDTO>(new UserOutputDTO(user), HttpStatus.OK);
 
