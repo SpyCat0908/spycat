@@ -16,6 +16,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
@@ -44,6 +45,8 @@ public class User implements UserDetails{
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Pet> pets = new ArrayList<Pet>();
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<Pet> petsFavoritos = new ArrayList<Pet>(); 
     private String icon;
 
     public User (UserInputDTO dto){
@@ -97,6 +100,12 @@ public class User implements UserDetails{
     @Override
     public String getUsername(){
         return this.email;
+    }
+    
+    public void setPetsFavoritos(Long id){
+        Pet pet = new Pet();
+        pet.setId(id);
+        petsFavoritos.add(pet);
     }
     
     public String getUsernameReal(){

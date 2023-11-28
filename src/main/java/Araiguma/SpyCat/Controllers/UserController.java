@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import Araiguma.SpyCat.Models.User;
 import Araiguma.SpyCat.Services.UserService;
+import Araiguma.SpyCat.dtos.UserFavoritePetInputDTO;
 import Araiguma.SpyCat.dtos.UserInputDTO;
 import Araiguma.SpyCat.dtos.UserLoginInputDTO;
 import Araiguma.SpyCat.dtos.UserOutputDTO;
@@ -60,4 +61,9 @@ public class UserController {
             service.delete(id, password);
             return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
         }
+    @PostMapping("/favorite")
+    public ResponseEntity<UserOutputDTO> favorite( @RequestBody UserFavoritePetInputDTO dto){
+        UserOutputDTO user = service.favoritarPet(dto);
+        return new ResponseEntity<UserOutputDTO>(user, HttpStatus.OK);
+    }
 }

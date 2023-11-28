@@ -17,6 +17,7 @@ import Araiguma.SpyCat.Models.User;
 import Araiguma.SpyCat.Repositories.CommentRepository;
 import Araiguma.SpyCat.Repositories.PasswordResetTokenRepository;
 import Araiguma.SpyCat.Repositories.UserRepository;
+import Araiguma.SpyCat.dtos.UserFavoritePetInputDTO;
 import Araiguma.SpyCat.dtos.UserInputDTO;
 import Araiguma.SpyCat.dtos.UserOutputDTO;
 import Araiguma.SpyCat.dtos.UserUpdateInputDTO;
@@ -130,6 +131,21 @@ public class UserService implements UserDetailsService {
 
     }
 }
+    public UserOutputDTO favoritarPet(UserFavoritePetInputDTO dto){
+        if(repository.existsById(dto.id_user())){
+
+            User user = repository.findById(5l).get();
+            user.setPetsFavoritos(dto.id_pet());
+            
+            return new UserOutputDTO(repository.save(user));
+
+        }
+        else{
+            return null;
+        }
+        
+
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
