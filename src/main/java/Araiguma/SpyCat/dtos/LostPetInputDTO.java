@@ -1,10 +1,17 @@
 package Araiguma.SpyCat.dtos;
 
+import java.util.List;
+
+import Araiguma.SpyCat.Enum.Status;
+import Araiguma.SpyCat.Models.User;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 public record LostPetInputDTO(
-    @NotBlank
+
     Long id,
     @NotBlank
     String description,
@@ -20,8 +27,12 @@ public record LostPetInputDTO(
     String color,
     @NotBlank
     String specie,
-    @NotEmpty
-    LocationInputDTO location
+    @NotNull
+    LocationInputDTO location,
+    List<ImageInputDTO> images,
+    @Enumerated(EnumType.STRING)
+    Status status,
+    User user
 ) {
     
 }
