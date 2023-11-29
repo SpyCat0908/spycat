@@ -21,7 +21,7 @@ public class Ong {
     private long id;
     @Column(nullable = false, unique = true)
     private String tradingName;
-    @Column(length = 14, nullable = false, unique = true)
+    @Column( nullable = false, unique = true)
     private String cnpj;
     @Column(nullable = false, length = 11)
     private String phone;

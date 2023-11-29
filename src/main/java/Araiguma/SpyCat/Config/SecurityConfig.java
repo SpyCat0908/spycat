@@ -55,6 +55,7 @@ public class SecurityConfig {
                 .cors().and()
                 .authorizeHttpRequests(requests -> 
                     requests
+                        .requestMatchers(HttpMethod.POST, "/ongs").permitAll()
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/savePassword").permitAll()

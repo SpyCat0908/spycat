@@ -7,13 +7,13 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 public record OngInputDTO(
     Long id,
     @NotBlank
     String tradingName,
     @NotBlank
-    
     @CNPJ
     String cnpj,
     @NotBlank
@@ -21,6 +21,6 @@ public record OngInputDTO(
     @NotBlank
     @Email
     String email,
-    @NotEmpty
+    @NotNull
     LocationInputDTO location
 ) {}
