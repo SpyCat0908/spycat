@@ -39,8 +39,8 @@ public class User implements UserDetails{
     private String city;
     // @Column(nullable = false)
     private String state;
-    @OneToOne
-    private PasswordResetToken passwordResetToken;
+    @OneToMany
+    private List<PasswordResetToken> passwordResetToken = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Pet> pets = new ArrayList<Pet>();
@@ -55,6 +55,10 @@ public class User implements UserDetails{
         this.email = dto.email();
 
     }
+    public void setPasswordResetToken(PasswordResetToken token){
+        this.passwordResetToken.add(token);
+    }
+
 
     public User (UserLoginInputDTO dto){
         this.email = dto.email();

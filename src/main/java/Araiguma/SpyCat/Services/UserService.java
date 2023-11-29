@@ -111,7 +111,6 @@ public class UserService implements UserDetailsService {
     }
     
         public void createPasswordResetTokenForUser(User user, String token) {
-    if (user.getPasswordResetToken() == null) {
         PasswordResetToken myToken = new PasswordResetToken();
         myToken.setUser(user);
         myToken.setToken(token);
@@ -120,21 +119,13 @@ public class UserService implements UserDetailsService {
         .toInstant(ZoneOffset.of("-03:00")));
         user.setPasswordResetToken(passwordResetTokenRepository.save(myToken));
         repository.save(user);
-    }
-    else{
-        
-        PasswordResetToken myToken = passwordResetTokenRepository.findById(user.getPasswordResetToken().getId()).get();
-        
-        myToken.setToken(token);
-        user.setPasswordResetToken(passwordResetTokenRepository.save(myToken));
-        repository.save(user);
+    
 
-    }
 }
     public UserOutputDTO favoritarPet(UserFavoritePetInputDTO dto){
         if(repository.existsById(dto.id_user())){
 
-            User user = repository.findById(5l).get();
+            User user = repository.findById(dto.id_user()).get();
             user.setPetsFavoritos(dto.id_pet());
             
             return new UserOutputDTO(repository.save(user));

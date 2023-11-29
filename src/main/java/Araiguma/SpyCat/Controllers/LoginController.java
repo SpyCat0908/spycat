@@ -113,7 +113,7 @@ public class LoginController {
         User user = userService.findUserBypasswordResetToken(dto.token());
 
         if(!user.getEmail().isEmpty()) {
-            if(user.getPasswordResetToken().getExpiryDate().isBefore(Instant.now())){
+            if(user.getPasswordResetToken().get(user.getPasswordResetToken().size()-1).getExpiryDate().isAfter(Instant.now())){
                 userService.changeUserPassword(user, dto.password());
                 return new ResponseEntity<UserOutputDTO>(new UserOutputDTO(user), HttpStatus.OK);
 
